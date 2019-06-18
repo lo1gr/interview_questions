@@ -51,7 +51,7 @@ Since we are given that at least one child is a girl there are three possibiliti
   - the outcome follows a multinomial distribution with n=12 and k=3. but the classes are indistinguishable
   -12 people. The first team: 12 choose 4 = (12 choose 4). Then the second team would be 4 of the remaining 8 people: (8 choose 4). The last team would be 4 of the remaining 4, which obviously equals 1, but to be thorough: (4 choose 4).
 
-(12 choose 4)(8 choose 4)(4 choose 4)=495∗70∗1=34,650.
+(12 choose 4)(8 choose 4)(4 choose 4)=495*70*1=34,650.
 
 However, this sorting assumes that which team each person is on is important - ie, team 1, team 2, etc. If there are no “team numbers” and we’re just dividing people up, then you also need to divide by the ways to assign team numbers = 3!. So 34650/3!=5,775.
 
@@ -61,24 +61,76 @@ permutation: n!/(n-k)!
 
 #### 10. Your hash function assigns each object to a number between 1:10, each with equal probability. With 10 objects, what is the probability of a hash collision? What is the expected number of hash collisions? What is the expected number of hashes that are unused.
   - the probability of a hash collision: 1-(10!/10^10) = 1-no hash collision : first can choose 10 then 9 then 8 so 10!/10^10 possibilities
-  - the expected number of hash collisions: 1-10*(9/10)^10
-  - the expected number of hashes that are unused: 10*(9/10)^10
+
+  - Let 𝐻​ be the number of hash collisions. This is equal to the number of unused buckets because for there to be a collision, then a bucket must be empty.
+
+  Denote by I(k) the indicator that the integer 1≤𝑘≤10​ is used. Notice that for distinct indices, these are independent random variables. The expectation of 𝐼1​ is the probability that at least one of the objects get hashed to the bucket 1 . This is equal to 1 minus the probability that none of the 10 objects get hashed to 1.
+  𝔼(𝐼1)=1−(9/10)^10.
+  𝔼(𝑁)=𝔼(𝐼1+𝐼2+…+𝐼10) = 𝔼(𝐼1)+𝔼(𝐼2)+…+𝔼(𝐼10)​ = 10(1−(9/10)^10)≈6.5132.​
+  This is the number of hash collisions but also the number of used buckets.
+
+  - the expected number of hashes that are unused: 10 - 10(1−(9/10)^10) ≈ 3.4868.
 #### 11. You call 2 UberX’s and 3 Lyfts. If the time that each takes to reach you is IID, what is the probability that all the Lyfts arrive first? What is the probability that all the UberX’s arrive first?
-  - Lyfts arrive first: 2!*3!/5!
-  - Ubers arrive first: same
-#### 12. I write a program should print out all the numbers from 1 to 300, but prints out Fizz instead if the number is divisible by 3, Buzz instead if the number is divisible by 5, and FizzBuzz if the number is divisible by 3 and 5. What is the total number of numbers that is either Fizzed, Buzzed, or FizzBuzzed?
-  - 100+60-20=140
+(3/5)(2/4)(1/3) = 1/10
+(2/5)(1/4)=1/10
+
+#### 12. I write a program should print out all the numbers from 1 to 300, but prints out Fizz instead if the number is divisible by 3, Buzz instead if the number is divisible by 5, and FizzBuzz if the number is divisible by 3 and 5. What is the total number of numbers that is either Fizz, Buzz, or FizzBuzz?
+  - Fizz: divisible by 3: 3, 6... 300: 300/3 = 100
+  - Buzz: divisible by 5: 5, 10...300: 300/5 = 60
+  - Fizzbuzz: divisible by 3and5 so divisible by 3*15=15: 15,30...300 = 300/15 = 20
+  - TOTAL = 100+60-20=140
+
 #### 13. On a dating site, users can select 5 out of 24 adjectives to describe themselves. A match is declared between two users if they match on at least 4 adjectives. If Alice and Bob randomly pick adjectives, what is the probability that they form a match?
-  - 24C5*(1+5(24-5))/24C5*24C5 = 4/1771
+There are (5C4)=5 sets of 4 adjectives that Bob can receive that Alice chose.
+Similarly, there are (19C1)=19 adjectives that Bob can receive that were NOT given to Alice.
+
+Note that there are (24C5) different sets of adjectives that a test-taker can receive.
+
+[(5C4)x(19C1)+(5C5)x(19C0)]/(24C5)=41771≈0.2
+
 #### 14. A lazy high school senior types up application and envelopes to n different colleges, but puts the applications randomly into the envelopes. What is the expected number of applications that went to the right college?
+proba that 1 letter gets to right college is 1/n
+number of letters sent (and colleges) is n
+so:
+n * 1/n
   - 1
 #### 15. Let’s say you have a very tall father. On average, what would you expect the height of his son to be? Taller, equal, or shorter? What if you had a very short father?
   - Shorter. Regression to the mean
 #### 16. What’s the expected number of coin flips until you get two heads in a row? What’s the expected number of coin flips until you get two tails in a row?
+Let x the expected number of coin flips required for getting two heads in a row.
+1) if the first flip turns out to be tail - you need x more flips since the events are independent. Probability of the event 1/2. Since 1 flip was wasted total number of flips required (1+x).
+2) if the first flip becomes head, but the second one is tail(HT) - 2 flips are wasted, here total number flips required would be (2+x). Probability of HT out of HH, HT, TH, TT is (1/4)
+3) the best case, the first two flips turn out to be heads both(HH). Probability, 1/4 i.e. HH out of HH, HT, TH, TT.  No of flips required 2.
+
+So from the above scenarios,
+     x = 1/2(1+x) + 1/4(2+x) + (1/4)* 2
+=>   x = 1/2 [ (1+x) + 1/2(2+x) + 1 ]
+=>   x = 1/2 [ 1 + x + 1 + x/2 + 1 ]
+=>   x = 3/2 + (3/4)x
+=>   x / 4 = 3/2
+=>   x = 6
+
+So the expected number of flips would be '6'
 #### 17. Let’s say we play a game where I keep flipping a coin until I get heads. If the first time I get heads is on the nth coin, then I pay you 2n-1 dollars. How much would you pay me to play this game?
+ - 1: 1, 2: 3, 3: 5
+ - 0.5*1+3*(0.5)^2+ 5*(0.5)^3
+ - lim = inf!
   - less than $3
 #### 18. You have two coins, one of which is fair and comes up heads with a probability 1/2, and the other which is biased and comes up heads with probability 3/4. You randomly pick coin and flip it twice, and get heads both times. What is the probability that you picked the fair coin?
-  - 4/13
+proba HH with fair: (1/2)^2 = 1/4
+proba HH with unfair: (3/4)^2 = 9/16
+
+P(A|B) = [P(B|A)* P(A)]/P(B)
+A is pick fair B is HH both times
+
+p(B) = 0.5 * 1/4 + 0.5*9/16
+[1/4 * 0.5]/[0.5*1/4+0.5*9/16]
+[1/8]/[1/8+9/32]
+[1/8]/[13/32]
+= [32]/[8*13]
+=4/13
+
+
 #### 19. You have a 0.1% chance of picking up a coin with both heads, and a 99.9% chance that you pick up a fair coin. You flip your coin and it comes up heads 10 times. What’s the chance that you picked up the fair coin, given the information that you observed?
   * Events: F = "picked a fair coin", T = "10 heads in a row"
   * (1) P(F|T) = P(T|F)P(F)/P(T) (Bayes formula)
