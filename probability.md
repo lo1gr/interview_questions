@@ -120,7 +120,7 @@ So the expected number of flips would be '6'
 proba HH with fair: (1/2)^2 = 1/4
 proba HH with unfair: (3/4)^2 = 9/16
 
-P(A|B) = [P(B|A)* P(A)]/P(B)
+P(A|B) = [P(B|A)* P(A)]/P(B)    (Bayes formula)
 A is pick fair B is HH both times
 
 p(B) = 0.5 * 1/4 + 0.5*9/16
@@ -132,12 +132,46 @@ p(B) = 0.5 * 1/4 + 0.5*9/16
 
 
 #### 19. You have a 0.1% chance of picking up a coin with both heads, and a 99.9% chance that you pick up a fair coin. You flip your coin and it comes up heads 10 times. What’s the chance that you picked up the fair coin, given the information that you observed?
-  * Events: F = "picked a fair coin", T = "10 heads in a row"
-  * (1) P(F|T) = P(T|F)P(F)/P(T) (Bayes formula)
-  * (2) P(T) = P(T|F)P(F) + P(T|¬F)P(¬F) (total probabilities formula)
-  * Injecting (2) in (1): P(F|T) = P(T|F)P(F)/(P(T|F)P(F) + P(T|¬F)P(¬F)) = 1 / (1 + P(T|¬F)P(¬F)/(P(T|F)P(F)))
-  * Numerically: 1/(1 + 0.001 * 2^10 /0.999).
-  * With 2^10 ≈ 1000 and 0.999 ≈ 1 this simplifies to 1/2
+P(A|B) = [P(B|A)* P(A)]/P(B)(Bayes formula)
+
+B is Head 10 times
+A is proba fair coin
+
+
+P(B|A) is proba 10 Heads knowing coin is fair =
+(1/2)^10
+
+P(B) = proba 10 Heads:
+0.001*1 + 0.999*(1/2)^10
+fake coin has to do all H + fair coin * proba
+
+P(A|B) = [(1/2)^10 * 0.999]/[0.001*1 + 0.999*(1/2)^10]
+With 2^10 ≈ 1000 and 0.999 ≈ 1 this simplifies to:
+so (1/2)^10 ≈ 0.001
+hence 0.001/[0.001+0.001] = 1/2
+
+
+
 #### 20. What is a P-Value ?
-  * The probability to obtain a similar or more extreme result than observed when the null hypothesis is assumed.
-  * ⇒ If the p-value is small, the null hypothesis is unlikely
+The P value, or calculated probability, is the probability of finding the observed, or more extreme, results when the null hypothesis (H0) of a study question is true.
+P is also described in terms of rejecting H0 when it is actually true, however, it is not a direct probability of this state.
+
+Many people decide, before doing a hypothesis test, on a maximum p-value for which they will reject the null hypothesis. This value is often denoted α (alpha) and is also called the significance level = Type I error
+
+
+P-low reject H0
+The p-value is used as an alternative to rejection points to provide the smallest level of significance at which the null hypothesis would be rejected. A smaller p-value means that there is stronger evidence in favor of the alternative hypothesis.
+
+P-values are calculated using p-value tables or spreadsheet/statistical software.
+
+For ease of comparison, researchers often feature the p-value in the hypothesis test and allow the reader to interpret the statistical significance themselves. This is called a p-value approach to hypothesis testing.
+
+#### 21. Type I and Type II error ?
+A type I error occurs when the null hypothesis (H0) is true, but is rejected. = significance level = False positive
+A type II error occurs when the null hypothesis is false, but erroneously fails to be rejected. =
+
+|                NULL hypothesis is:            |
+|                |    True      |    False      |
+|                 ------------- | ------------- |
+| Fail to reject |  test            | Content Cell  |
+| Reject         | Type I error | Content Cell  |
