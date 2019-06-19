@@ -18,7 +18,7 @@
     - It depends on your model. If your model suffers from high bias, getting more data won’t improve your test results beyond a point. You’d need to add more features, etc.
   - Practically,
     - Also there’s a tradeoff between having more data and the additional storage, computational power, memory it requires. Hence, always think about the cost of having more data.
-#### 5. What are advantages of plotting your data before per- forming analysis?
+#### 5. What are advantages of plotting your data before performing analysis?
   - 1) Data sets have errors.  You won't find them all but you might find some. That 212 year old man. That 9 foot tall woman.  
 
 2) Variables can have skewness, outliers etc.  Then the arithmetic mean might not be useful. Which means the standard deviation isn't useful.  
