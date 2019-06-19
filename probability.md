@@ -175,3 +175,12 @@ A type II error occurs when the null hypothesis is false, but erroneously fails 
 |                 ------------- | ------------- |
 | Fail to reject |  test            | Content Cell  |
 | Reject         | Type I error | Content Cell  |
+
+
+
+#### 22. There's a game where you are given two fair six-sided dice and asked to roll. If the sum of the values on the dice equals seven, then you win $21. However, you must pay $5 to play each time you roll both dice. Do you play this game?
+
+36 combinations: 6*6.
+6 possibilities to get 7: 5&2 2&5  3&4 4&3  6&1  1&6
+21*1/6 -5 = -1.5
+negative expectation NO dont play!

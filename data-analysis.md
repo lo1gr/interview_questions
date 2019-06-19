@@ -99,3 +99,11 @@ where  is the ability of person  and  is the difficulty of item}.
   - <https://bl.ocks.org/rpgove/0060ff3b656618e9136b>
 #### 27. Let's say you're building the recommended music engine at Spotify to recommend people music based on past listening history. How would you approach this problem?
   - [collaborative filtering](https://en.wikipedia.org/wiki/Collaborative_filtering)
+
+
+
+N26:
+  How would you identify an outlier in a data set?  
+
+FB:
+How can Facebook figure out when users falsify their attended schools?
