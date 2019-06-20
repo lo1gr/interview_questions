@@ -153,7 +153,7 @@ hence 0.001/[0.001+0.001] = 1/2
 
 
 #### 20. What is a P-Value ?
-The P value, or calculated probability, is the probability of finding the observed, or more extreme, results when the null hypothesis (H0) of a study question is true.
+In hypothesis test, The P value, or calculated probability, is the probability of finding the observed, or more extreme, results when the null hypothesis (H0) of a study question is true.
 P is also described in terms of rejecting H0 when it is actually true, however, it is not a direct probability of this state.
 
 Many people decide, before doing a hypothesis test, on a maximum p-value for which they will reject the null hypothesis. This value is often denoted α (alpha) and is also called the significance level = Type I error
@@ -162,19 +162,20 @@ Many people decide, before doing a hypothesis test, on a maximum p-value for whi
 P-low reject H0
 The p-value is used as an alternative to rejection points to provide the smallest level of significance at which the null hypothesis would be rejected. A smaller p-value means that there is stronger evidence in favor of the alternative hypothesis.
 
-P-values are calculated using p-value tables or spreadsheet/statistical software.
-
-For ease of comparison, researchers often feature the p-value in the hypothesis test and allow the reader to interpret the statistical significance themselves. This is called a p-value approach to hypothesis testing.
+The distance between the data and the model prediction is measured using a test statistic (such as a t-statistic or a chi-squared statistic). The P-value is then the probability that the chosen test statistic would have been at least as large
+as its observed value if every model assumption were correct, including the test hypothesis. This definition embodies a crucial point lost in traditional definitions: In logical terms, the P-value tests all the assumptions about how the data were generated (the entire model), not just the targeted hypothesis it is supposed to test (such as a null hypothesis).
 
 #### 21. Type I and Type II error ?
 A type I error occurs when the null hypothesis (H0) is true, but is rejected. = significance level = False positive
 A type II error occurs when the null hypothesis is false, but erroneously fails to be rejected. =
 
-|                NULL hypothesis is:            |
-|                |    True      |    False      |
-|                 ------------- | ------------- |
-| Fail to reject |  test            | Content Cell  |
-| Reject         | Type I error | Content Cell  |
++---------------------+--------------+--------------+
+| NULL hypothesis is: |              |              |
++---------------------+--------------+--------------+
+| True                | False        |              |
+| Fail to reject      | test         | Content Cell |
+| Reject              | Type I error | Content Cell |
++---------------------+--------------+--------------+
 
 
 
