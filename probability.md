@@ -185,3 +185,54 @@ A type II error occurs when the null hypothesis is false, but erroneously fails 
 6 possibilities to get 7: 5&2 2&5  3&4 4&3  6&1  1&6
 21*1/6 -5 = -1.5
 negative expectation NO dont play!
+
+
+### 23. You have 8 pennies, 7 weight the same, one weighs less. you  also have a judges scale. Find the one that weighs less in less than 3 steps.
+Split the 8 pennies into 3 groups of 3,3,2 pennies. Weight the first two groups of 3 pennies each.
+
+Case 1) - They weight the same. Therefore, take third group of 2 pennies and find the lighter coin.
+
+Case 2) Group 1 weights more than Group 2. Take group 2 (3 pennies) and pick any 2 out of 3. If they weight the same, then the third penny is lighter. Answer is trivial if they don't weight the same.
+
+It works for any scenario. Always split the groups in 3.
+
+
+### 24. Suppose that there is a building with 100 floors. You are given 2 identical eggs. The most interesting property of the eggs is that every egg has it’s own “threshold” floor. Let’s call that floor N. What this means is that the egg will not break when dropped from any floor below floor N, but the egg will definitely break from any floor above floor N, including floor N itself. For example, if the property of the eggs is that N equals 15, those eggs will always break on any floor higher than or equal to the 15th floor, but those eggs will never break on any floor below floor 15. The same holds true for the other egg since they are identical. These are very strong eggs, because they can be dropped multiple times without breaking as long as they are dropped from floors below their “threshold” floor, floor N. But once an egg is dropped from a floor above it’s threshold floor. Here is the puzzle: What strategy should be taken in order to minimize the number of egg drops used to find floor N (the threshold floor) for the egg? Also, what is the minimum number of drops for the worst case using this strategy?/ Remember that you are given 2 identical eggs which both have the same exact threshold floor.
+
+Binary search would be easy if infinite number of search: try floor 50, then 25...
+However only 2 eggs
+The next solution takes a little bit of the linear approach and mixes in a little of the splitting from our binary approach. We can start off by dropping an egg at floor 10, increasing the drop floor by 10 at a time, then going back to drop one floor at a time until we find that n. If our egg breaks at floor 10, we know n is one of the 9 floors below us.
+Worst case, the egg drops and doesn’t break until floor 100 (10 drops) and we drop the second egg but don’t break it for floors 91–99.
+It brings our worst case drop count to 19 drops.
+NEXT:
+What we should try to get with our next approach is to try to reduce the worst case scenario by trying to make all possible scenarios take the same number of drops.
+What if we tried to reduce the number of drops that would be required with the linear search (with the 2nd egg) after we get to one of the higher floors? This way we counteract the fact that getting to the higher floor took so many drops, and if we use less drops for the linear search we are balancing out the worst case.
+
+Let’s try to figure this out using some simple algebra. Suppose we drop an egg from floor x. If the egg breaks, then we would have to go through the previous x-1 floors one by one using a linear search.
+
+But, if the egg doesn’t break, in our original algorithm we would go up x floors to find the next floor to test from. Why not just go up x-1 floors instead of x floors? This would save us 1 drop if we have to do a linear search with the 2nd egg whenever the first egg breaks. This means that the next floor that should be attempted to drop from is x + (x-1) if the egg does not break from floor x.
+Hence: x representing the floor we throw the first egg. And this is the worst case:
+We throw the egg at floor x, then x-1, then x-2 ... until it breaks.
+x + (x-1) + (x-2) + (x-3) + ... + 1
+This is a triangular series.
+Which simplifies to:
+x(x + 1)/2
+
+x(x+1)/2 = 100
+x = 13.651
+so initial floor count is 14! then 13, then 12.
+
+The worst case:
+The solution for the worst case in this scenario occurs when the threshold floor is floor number 14 – because we will drop the first egg on floor 14, and it will break. Then we have to test floors 1-13 with the 2nd egg to see where the egg breaks again, and the egg will not break on any of those floors. But since the egg broke on the floor 14, we can conclude that the threshold floor is floor number 14.
+
+
+
+### 25. On an otherwise deserted and isolated island, 200 perfect logicians are stranded. The islanders are perfectly logical in every decision they make, and they will not do anything unless they are absolutely certain of the outcome. However, they cannot communicate with each other. They are forbidden from speaking with one another, or signing, or writing messages in the sand, else they be shot dead by the captain of a mysterious ship that visits the island each night. Of the 200 islanders, 100 have blue eyes, and 100 have brown eyes. However, no individual knows what color their own eyes are. There are no reflective surfaces on the island for the inhabitants to see a reflection of their own eyes. They can each see the 199 other islanders and their eye colors, but any given individual does not know if his or her own eyes are brown, blue, or perhaps another color entirely. And remember, they cannot communicate with each other in any way under penalty of death. Each night, when the captain of the ship comes, the islanders have a chance to leave the barren and desolate spit of land they have been marooned on. If an islander tells the captain the color of his or her own eyes, they may board the ship and leave. If they get it wrong, they will be shot dead. Now, there is one more person on the island: the guru, who the islanders know to always tell the truth. The guru has green eyes. One day, she stands up before all 200 islanders and says: I see a person with blue eyes. Who leaves the island? And when do they leave?
+You know that if there were only one person with blue eyes, they would realize it immediately after hearing the guru's statement because they see no one else with blue eyes. Therefore, that person would leave on the first night.
+
+You also know that if there were two people with blue eyes, then they would both leave on the second night, because they would each look at the other blue-eyed person on the second morning and realize that the only reason the other blue-eyed person wouldn't leave on the first night is because they see another person with blue eyes. Seeing no one else with blue eyes, each of these two people realize it must be them.
+Now consider the case of three blue-eyed islanders. It has been established that if only two people had blue eyes they would leave on the second night. You, the third blue-eyed person in our example, know this, as do the other two blue-eyed people. So when you wake up on the third morning, and the two other blue-eyed people have not left, you know that they must see another person with blue eyes, and you can see that no one else on the island has blue eyes, so you know it must be you. All three of you realize this simultaneously, and all three leave on the third night.
+
+Each blue-eyed islander knows from looking around the island that there are 99 other people with blue eyes and 100 people with brown eyes. But because they cannot depart the island without being certain, they cannot begin the process of leaving until the guru speaks, and common knowledge is attained. Without knowing that everyone knows that everyone knows that there is at least one person with blue eyes, they cannot leave.
+
+However people with brown eyes cannot leave.
