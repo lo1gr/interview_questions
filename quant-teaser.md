@@ -9,6 +9,7 @@ maybe combination of 2 primes?
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=\sum&space;67&plus;88999" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\sum&space;67&plus;88999" title="\sum 67+88999" /></a>
 
+$`\sqrt{2}`$
 
 #### 2. What is the singles digit for 2^230?
 mutliples of 2: 2 4 8 6 2   and repeat!
