@@ -1,14 +1,67 @@
-## Probability
+# Probability
+
+You might encounter probability questions in two different ways during your interview process: They might ask you some probability-based brain teasers during the technical in-person interview to see how approach this kind of problem, or you might need to answer probability question in the qunatitative aptidude test.
+
+Here is a reminder of some mathematical formulas and concepts that you should have in mind to tackle these questions:
+
+...
+
+The following questions are a mix of 3 types of questions: 
+- practical probability problems
+- theoretical probability problems (mainly focusing on distributios)
+- brain teasers that might involve some probabilities in the solution
+
+## Easy questions
+
+#### Tom has a 40% chance of winning a hand at blackjack. If he wins a hand, he gets double the amount of money he bet. If he looses a hand, he will loose the money at that he bet. He has 200€ and bets 50€ a hand. What is the probability that he will still have money at the end of the forths hand?
+We need to reformulate the question: to still have moneey after 4 hands, he needs to win at least one hand (otherwise he will be out of money). 
+P("win at least 1 hand") = 1- P("win no hands") = 1 - (1-0,4)^4 = 1 - 0.6^4 = 87.04%
+
+Final answer: 87.04%
+
+#### You call 2 UberX’s and 3 Lyfts at the same time. If the time that each takes to reach you is identically and independtly distributed, what is the probability that all the Lyfts arrive first? What is the probability that all the UberX’s arrive first?
+For the first Lyft, there is a 3/5 chane that it arrives first. For the second one, there are 4 cars left out of which 2 are lyfts (i.e. 2/4 chance), etc.
+Due to independence:
+P("all Lyfts arrive first") = (3/5)*(2/4)*(1/3) = 1/10
+P("all Ubers arrive firs") = (2/5)*(1/4)=1/10
+
+Final answer: 1/10 (for both questions)
+
+#### In any 15-minute interval, there is a 20% probability that you will see at least one shooting star. What is the probability that you see at least one shooting star in the period of an hour?
+There are 4 15-min intervals in one hour.
+P("at least 1 shooting star in an hour") = 1- P("no shooting star in an hour") = 1 - 0.8^4 = 59.04%
+
+Final answer: 59.04%
+
+#### For numbers reaching from 1 to 300, how many are divible by 3 or 5 or 3 and 5? 
+  - divisible by 3: 3, 6... 300: 300/3 = 100
+  - divisible by 5: 5, 10...300: 300/5 = 60
+  - divisible by 3 and 5 so divisible by 3*5=15: 15,30...300 = 300/15 = 20
+  - TOTAL = 100+60-20=140
+
+Final answer: 140
 
 
-#### 1. Bobo the amoeba has a 25%, 25%, and 50% chance of producing 0, 1, or 2 o spring, respectively. Each of Bobo’s descendants also have the same probabilities. What is the probability that Bobo’s lineage dies out?
+
+## Medium-level questions
+
+
+## Hard questions
+
+
+
+------------------------------------------------------------
+! Transfer into above structure !
+------------------------------------------------------------
+
+
+
+#### 1. Bobo the amoeba has a 25%, 25%, and 50% chance of having 0, 1, or 2 children, respectively. Each of Bobo’s descendants also have the same probabilities. What is the probability that Bobo’s lineage dies out?
   - p=1/4+1/4*p+1/2*p^2 => p=1/2
   - find the roots of 2p^2-3p+1=0
   - x= [-b+-sqrt(b^2-4ac)]/2a
   - it has roots 1/2 and 1, but would expect it lower than 1 hence it is 1/2.
-#### 2. In any 15-minute interval, there is a 20% probability that you will see at least one shooting star. What is the probability that you see at least one shooting star in the period of an hour?
- - at least one shooting star in 1 h = 1-no shooting stars in 1 h
-  - 1-(0.8)^4. Or, we can use Poisson processes
+
 #### 3. How can you generate a random number between 1 - 7 with only a die?
 Depends on the probability distribution.
 
@@ -70,15 +123,9 @@ permutation: n!/(n-k)!
   This is the number of hash collisions but also the number of used buckets.
 
   - the expected number of hashes that are unused: 10 - 10(1−(9/10)^10) ≈ 3.4868.
-#### 11. You call 2 UberX’s and 3 Lyfts. If the time that each takes to reach you is IID, what is the probability that all the Lyfts arrive first? What is the probability that all the UberX’s arrive first?
-(3/5)(2/4)(1/3) = 1/10
-(2/5)(1/4)=1/10
 
-#### 12. I write a program should print out all the numbers from 1 to 300, but prints out Fizz instead if the number is divisible by 3, Buzz instead if the number is divisible by 5, and FizzBuzz if the number is divisible by 3 and 5. What is the total number of numbers that is either Fizz, Buzz, or FizzBuzz?
-  - Fizz: divisible by 3: 3, 6... 300: 300/3 = 100
-  - Buzz: divisible by 5: 5, 10...300: 300/5 = 60
-  - Fizzbuzz: divisible by 3and5 so divisible by 3*15=15: 15,30...300 = 300/15 = 20
-  - TOTAL = 100+60-20=140
+
+
 
 #### 13. On a dating site, users can select 5 out of 24 adjectives to describe themselves. A match is declared between two users if they match on at least 4 adjectives. If Alice and Bob randomly pick adjectives, what is the probability that they form a match?
 There are (5C4)=5 sets of 4 adjectives that Bob can receive that Alice chose.
@@ -187,7 +234,7 @@ A type II error occurs when the null hypothesis is false, but erroneously fails 
 negative expectation NO dont play!
 
 
-### 23. You have 8 pennies, 7 weight the same, one weighs less. you  also have a judges scale. Find the one that weighs less in less than 3 steps.
+### 23. You have 8 pennies, 7 weight the same, one weighs less. you  also have a judges scale. Find the one that weighs the least in less than 3 steps.
 Split the 8 pennies into 3 groups of 3,3,2 pennies. Weight the first two groups of 3 pennies each.
 
 Case 1) - They weight the same. Therefore, take third group of 2 pennies and find the lighter coin.
