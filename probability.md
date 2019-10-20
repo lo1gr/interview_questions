@@ -5,6 +5,16 @@ You might encounter probability questions in two different ways during your inte
 Here is a reminder of some mathematical formulas and concepts that you should have in mind to tackle these questions:
 
 ...
+nCr
+independnce
+conditional probability
+Bayes
+disjoint probability
+total probability
+P(A annd B)
+expectation formula
+...
+
 
 The following questions are a mix of 3 types of questions: 
 - practical probability problems
@@ -41,12 +51,56 @@ Final answer: 59.04%
 
 Final answer: 140
 
+#### A glass contains 10 red balls, 4 white balls, and 3 green balls. Two are drawn in sequence, without replacment. What is the probability that the 2 balls are green?
+For the first ball, we have 3 choices, after that we are left  wiith 2 balls. As such:
+P("2 balls are green") = 3*2/16*15 = 0.025 0 2.5%
+
+Final answer = 2.5%
+
 
 
 ## Medium-level questions
 
+#### On a dating site, users can select 5 out of 24 adjectives to describe themselves. A match is declared between 2 users if they match on at least 4 adjectives. If Alice and Bob randomly pick adjectives, what is the probability that they form a match?
+We need to distinguish between 2 different scenarios:
+1) They have 4/5 common adjectives
+2) They have 5/5 common adjectives
+
+1)
+Alice has chosen 5 adjectives.
+There are (5C4)=5 sets of 4 adjectives that Bob can receive that Alice chose.
+Lets say she chose A, B, C, D & E.
+Bob can choose A,B,C & D or A,B, D & E, ... or (5C4)
+Similarly, there are (19C1)=19 adjectives that Bob can receive that were NOT given to Alice.
+2)
+There is only onee possible way to have the same adjectivs
+
+Note that there are (24C5) different sets of adjectives that a test-taker can receive.
+
+We get:
+[(5C4)x(19C1)+1]/(24C5)
+
+#### You are a prisoner sentenced to death. The Emperor offers you a chance to live by playing a simple game. He gives you 50 black marbles, 50 white marbles and 2 empty bowls. He then says, "Divide these 100 marbles into these 2 bowls. You can divide them ANY WAY YOU LIKE as long as you use all the marbles. Then I will blindfold you and mix the bowls around (without mixing the marbles). You then can choose one bowl and remove ONE marble. If the marble is WHITE you will live, but if the marble is BLACK... you will die." How do you divide the marbles up so that you have the greatest probability of choosing a WHITE marble?
+The best way to divide them is to put 1 white marble into 1 bowl. The other bowl is filled with 99 marblkes (49 white & 50 black).
+This way: if you get the first container (which you can get with 50% chance), you win 100% of the time. If you get the other bowl, you still win almost 50% of the time.
 
 ## Hard questions
+
+#### A line of 100 airline passengers is waiting to board a plane. They each hold a ticket to one of the 100 seats on that flight. (For convenience, let's say that the nth passenger in line has a ticket for the seat number n.) Unfortunately, the first person in line is crazy, and will ignore the seat number on their ticket, picking a random seat to occupy. All of the other passengers are quite normal, and will go to their proper seat unless it is already occupied. If it is occupied, they will then find a free seat to sit in, at random. What is the probability that the last (100th) person to board the plane will sit in their proper seat (#100)?
+There is a trick to solve this problem. To get the right  probability, we need to simplify thee problem. 
+1) There  are only 2 passengers:
+A sits on the good seat, so will  B
+A sits on the wrong seat, so will B
+--> The probability is thus 50%
+2) There are 3 passngrs:
+A sits on the rights seat, so B & C will as well. C will be on the correct seat
+A sits on B's seat, B comes in and sits on A's seat. C will be on the correct seat
+A sits on B's seat, B comes in and sits on C's seat. C will be on the wrong seat
+A sits on C's seat, B will therefore sit on B's seat. C will b on the wrong seat
+--> The probability is thus 50%
+3) and so on
+
+correct answer: 50%
 
 
 
@@ -127,22 +181,8 @@ permutation: n!/(n-k)!
 
 
 
-#### 13. On a dating site, users can select 5 out of 24 adjectives to describe themselves. A match is declared between two users if they match on at least 4 adjectives. If Alice and Bob randomly pick adjectives, what is the probability that they form a match?
-There are (5C4)=5 sets of 4 adjectives that Bob can receive that Alice chose.
-Similarly, there are (19C1)=19 adjectives that Bob can receive that were NOT given to Alice.
 
-Note that there are (24C5) different sets of adjectives that a test-taker can receive.
 
-[(5C4)x(19C1)+(5C5)x(19C0)]/(24C5)=41771≈0.2
-
-#### 14. A lazy high school senior types up application and envelopes to n different colleges, but puts the applications randomly into the envelopes. What is the expected number of applications that went to the right college?
-proba that 1 letter gets to right college is 1/n
-number of letters sent (and colleges) is n
-so:
-n * 1/n
-  - 1
-#### 15. Let’s say you have a very tall father. On average, what would you expect the height of his son to be? Taller, equal, or shorter? What if you had a very short father?
-  - Shorter. Regression to the mean
 #### 16. What’s the expected number of coin flips until you get two heads in a row? What’s the expected number of coin flips until you get two tails in a row?
 Let x the expected number of coin flips required for getting two heads in a row.
 1) if the first flip turns out to be tail - you need x more flips since the events are independent. Probability of the event 1/2. Since 1 flip was wasted total number of flips required (1+x).
@@ -163,6 +203,8 @@ So the expected number of flips would be '6'
  - 0.5*1+3*(0.5)^2+ 5*(0.5)^3
  - lim = inf!
   - less than $3
+
+
 #### 18. You have two coins, one of which is fair and comes up heads with a probability 1/2, and the other which is biased and comes up heads with probability 3/4. You randomly pick coin and flip it twice, and get heads both times. What is the probability that you picked the fair coin?
 proba HH with fair: (1/2)^2 = 1/4
 proba HH with unfair: (3/4)^2 = 9/16
