@@ -16,7 +16,7 @@ expectation formula
 ...
 
 
-The following questions are a mix of 3 types of questions: 
+The following questions are a mix of 3 types of questions:
 - practical probability problems
 - theoretical probability problems (mainly focusing on distributios)
 - brain teasers that might involve some probabilities in the solution
@@ -24,7 +24,7 @@ The following questions are a mix of 3 types of questions:
 ## Easy questions
 
 #### Tom has a 40% chance of winning a hand at blackjack. If he wins a hand, he gets double the amount of money he bet. If he looses a hand, he will loose the money at that he bet. He has 200€ and bets 50€ a hand. What is the probability that he will still have money at the end of the forths hand?
-We need to reformulate the question: to still have moneey after 4 hands, he needs to win at least one hand (otherwise he will be out of money). 
+We need to reformulate the question: to still have moneey after 4 hands, he needs to win at least one hand (otherwise he will be out of money).
 P("win at least 1 hand") = 1- P("win no hands") = 1 - (1-0,4)^4 = 1 - 0.6^4 = 87.04%
 
 Final answer: 87.04%
@@ -43,7 +43,7 @@ P("at least 1 shooting star in an hour") = 1- P("no shooting star in an hour") =
 
 Final answer: 59.04%
 
-#### For numbers reaching from 1 to 300, how many are divible by 3 or 5 or 3 and 5? 
+#### For numbers reaching from 1 to 300, how many are divible by 3 or 5 or 3 and 5?
   - divisible by 3: 3, 6... 300: 300/3 = 100
   - divisible by 5: 5, 10...300: 300/5 = 60
   - divisible by 3 and 5 so divisible by 3*5=15: 15,30...300 = 300/15 = 20
@@ -87,7 +87,7 @@ This way: if you get the first container (which you can get with 50% chance), yo
 ## Hard questions
 
 #### A line of 100 airline passengers is waiting to board a plane. They each hold a ticket to one of the 100 seats on that flight. (For convenience, let's say that the nth passenger in line has a ticket for the seat number n.) Unfortunately, the first person in line is crazy, and will ignore the seat number on their ticket, picking a random seat to occupy. All of the other passengers are quite normal, and will go to their proper seat unless it is already occupied. If it is occupied, they will then find a free seat to sit in, at random. What is the probability that the last (100th) person to board the plane will sit in their proper seat (#100)?
-There is a trick to solve this problem. To get the right  probability, we need to simplify thee problem. 
+There is a trick to solve this problem. To get the right  probability, we need to simplify thee problem.
 1) There  are only 2 passengers:
 A sits on the good seat, so will  B
 A sits on the wrong seat, so will B
@@ -325,3 +325,24 @@ Now consider the case of three blue-eyed islanders. It has been established that
 Each blue-eyed islander knows from looking around the island that there are 99 other people with blue eyes and 100 people with brown eyes. But because they cannot depart the island without being certain, they cannot begin the process of leaving until the guru speaks, and common knowledge is attained. Without knowing that everyone knows that everyone knows that there is at least one person with blue eyes, they cannot leave.
 
 However people with brown eyes cannot leave.
+
+
+
+### 26. a player is randomly dealt a sequence of 13 cards from a deck of 52 cards. All sequences of 13 cards are equally likely.
+In an equivalent model, the cards are chosen and dealt one at a time. When choosing a card, the dealer is
+equally likely to pick any of the cards that remain in the deck
+a) if you dealt 13 cards, what is the probability that the 13th card is a king:
+
+Since we are not told anything about the first 12 cards that are dealt, the proba that the 13th card is a King is the same as the proba that the first card dealt
+or in fact any particular card dealt is a King, = 4/52
+
+
+### 27. Fair six sided die is rolled 6 times. Proba of getting all outcomes as unique?
+6/6 * 5/6 * 4/6 * 3/6 * 2/6 * 1/6
+
+
+### 28. A group of 60 students is randomly split into 3 classes of = size. All partitions are =ly likely. Jack and Jill are 2 students belonging to that group. What is the probability that Jack and Jill will end up in the same class?
+19/59
+
+
+### 29. If you had 3 coins where you get $1 for all HHH or all TTT or lose $1 otherwise, would you play the game? How about if you can re-flip one coin?
