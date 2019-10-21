@@ -346,3 +346,15 @@ or in fact any particular card dealt is a King, = 4/52
 
 
 ### 29. If you had 3 coins where you get $1 for all HHH or all TTT or lose $1 otherwise, would you play the game? How about if you can re-flip one coin?
+2 possibilities at each stage (H or T)
+2^3 possiblities = 8
+2/8 to win (HHH and TTT):
+2/8 * 1 - 6/8 * 1 = -0.5EUR
+Dont play the game.
+
+What if can reflip a coin?
+Can reflip either coin:
+will reflip in those cases:   HTT TTH THH THH THT HTH
+will reflip the "odd one out every time": 50% chance of winning.
+so average gain is now:
+2/8 * 1 + (6/8) * 0.5 * 1 - (6/8) * 0.5 * 1 =
