@@ -1,0 +1,3 @@
+Bob:Rock,Blues,Jazz
+Alice:Rock,Jazz,Blues
+John:Jazz,Blues,Rock

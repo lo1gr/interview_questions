@@ -977,33 +977,34 @@ print(normalized)
 
 
 
-# import sys
-# from statistics import mean
-#
-# arr = []
-# for line in sys.stdin:
-#     arr.append(line.rstrip())
-#
-#
-# # date is leftmost 10 elements of array of array
-# # print(len('2009-03-02'))
-# dates = [el.split('|')[0] for el in arr]
-# prices = [float(el.split('|')[1]) for el in arr]
-#
-#
-#
-# for i in range(50,len(dates)):
-#     count = 0
-#     # The prices of the day of also influence in the DMA
-#     # reasonable assumption: weekends do not matter, only look at trading days
-#     DMA_9 = mean(prices[i-8:i+1])
-#     DMA_50 = mean(prices[i-49:i+1])
-#     if DMA_9 > DMA_50:
-#         count+=1
-#         print(dates[i])
-#
-# if count==0:
-#     print('NULL')
+import sys
+from statistics import mean
+
+arr = []
+for line in sys.stdin:
+  arr.append(line.rstrip())
+
+
+date is leftmost 10 elements of array of array
+print(len('2009-03-02'))
+dates = [el.split('|')[0] for el in arr]
+prices = [float(el.split('|')[1]) for el in arr]
+
+
+
+for i in range(50,len(dates)):
+    count = 0
+    # The prices of the day of also influence in the DMA
+    # reasonable assumption: weekends do not matter, only look at trading days
+    DMA_9 = mean(prices[i-8:i+1])
+    DMA_50 = mean(prices[i-49:i+1])
+    if DMA_9 > DMA_50:
+        count+=1
+        print(dates[i])
+
+if count==0:
+    print('NULL')
+
 
 
 # Median of Medians
