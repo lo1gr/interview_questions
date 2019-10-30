@@ -118,6 +118,21 @@ P(X_i|y) = 1/ sqrt(2PI(sigma^2))exp(-(X_i-u_y)^2/(2sigma^2))
 
 https://www.geeksforgeeks.org/naive-bayes-classifiers/
 
+#### What is Logistic Regression?
+#### Why do you need to apply feature scaling to logistic regression?
+Consider a scenario where we need to classify whether an email is spam or not. If we use linear regression for this problem, there is a need for setting up a threshold based on which classification can be done. Say if the actual class is malignant, predicted continuous value 0.4 and the threshold value is 0.5, the data point will be classified as not malignant which can lead to serious consequence in real time.
+Linear regression is unbounded and hence not suitable for classification. Comes logistic regressoin.
+
+S shape!
+<!-- https://towardsdatascience.com/logistic-regression-detailed-overview-46c4da4303bc -->
+<!-- https://christophm.github.io/interpretable-ml-book/logistic.html -->
+
+#### XgBoost
+Boosting is a sequential technique which works on the principle of an ensemble. It combines a set of weak learners and delivers improved prediction accuracy. At any instant t, the model outcomes are weighed based on the outcomes of previous instant t-1. The outcomes predicted correctly are given a lower weight and the ones miss-classified are weighted higher. Note that a weak learner is one which is slightly better than random guessing. For example, a decision tree whose predictions are slightly better than 50%. Let's understand boosting in general with a simple illustration.
+<!-- https://www.datacamp.com/community/tutorials/xgboost-in-python#what -->
+
+
+
 #### To see which model we like the best we can use different parameters:
 BIC: Bayesian Information Criterion
 AIC: Aikake Information Criterion

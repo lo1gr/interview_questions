@@ -297,3 +297,755 @@ if __name__ == '__main__':
         q = list(map(int, input().rstrip().split()))
 
         print(minimumBribes(q))
+
+
+#### Starting with a 1-indexed array of zeros and a list of operations, for each operation add a value to each of the array element between two given indices, inclusive. Once all operations have been performed, return the maximum value in your array.
+
+#### For example, the length of your array of zeros . Your list of queries is as follows:
+#### https://www.hackerrank.com/challenges/crush/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=arrays
+#### a b k
+#### 1 5 3
+#### 4 8 7
+#### 6 9 1
+#### index->	 1 2 3  4  5 6 7 8 9 10
+####	[0,0,0, 0, 0,0,0,0,0, 0]
+####	[3,3,3, 3, 3,0,0,0,0, 0]
+####	[3,3,3,10,10,7,7,7,0, 0]
+####	[3,3,3,10,10,8,8,8,1, 0]
+####largest value is 10
+
+
+
+        #!/bin/python3
+
+        import math
+        import os
+        import random
+        import re
+        import sys
+
+        # Complete the arrayManipulation function below.
+        def arrayManipulation(n, queries):
+                # Big O (N)
+                res = [0] * (n+1) # we only really need one terminal row, since we're applying each pass to all rows below
+                return res, queries
+
+
+                # loop through all the queries and apply the increments/decrements for each
+                # Big O (M) (size of queires)
+                for row in range(len(queries)):
+                        a = queries[row][0]
+                        b = queries[row][1]
+                        k = queries[row][2]
+
+                        res[a-1] += k # increment the starting position
+                        # this is where a loop would increment everything else between a & b by k
+                        # but instead of taking b-a steps, we take a constant 2 steps, saving huge on time
+                        res[b] -= k # decrement the position AFTER the ending position
+                # now loop through res one time - Big O (N) (size of res)
+                sm = 0 # running sum
+                mx = 0 # maximum value found so far
+                # loop2 that checks the overlap:
+
+                for i in range(len(res)):
+                    # only sum the positive values
+                        sm += res[i]
+                        if sm > mx:
+                                mx = sm
+
+                # total run time is Big O (2*N + M) >> Big O(N)
+                return mx
+
+
+        if __name__ == '__main__':
+            fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+            nm = input().split()
+
+            n = int(nm[0])
+
+            m = int(nm[1])
+
+            queries = []
+
+            for _ in range(m):
+                queries.append(list(map(int, input().rstrip().split())))
+
+            result = arrayManipulation(n, queries)
+
+            fptr.write(str(result) + '\n')
+
+            fptr.close()
+
+
+
+
+#### Harold is a kidnapper who wrote a ransom note, but now he is worried it will be traced back to him through his handwriting. He found a magazine and wants to know if he can cut out whole words from it and use them to create an untraceable replica of his ransom note. The words in his note are case-sensitive and he must use only whole words available in the magazine. He cannot use substrings or concatenation to create the words he needs.
+#### Given the words in the magazine and the words in the ransom note, print Yes if he can replicate his ransom note exactly using whole words from the magazine; otherwise, print No.
+####For example, the note is "Attack at dawn". The magazine contains only "attack at dawn". The magazine has all the right words, but there's a case mismatch. The answer is No.
+####input format:
+####The first line contains two space-separated integers, m and n, the numbers of words in the magazine and the note..
+####The second line contains m space-separated strings, each magazine[i].
+####The third line contains n space-separated strings, each note[i].
+
+
+input:
+6 5
+two times three is not four
+two times two is four
+output:
+No
+
+<!-- because two only appears once in the magazine -->
+
+
+
+            #!/bin/python3
+
+            import math
+            import os
+            import random
+            import re
+            import sys
+            from collections import Counter
+
+            # Complete the checkMagazine function below.
+            def checkMagazine(magazine, note):
+                if (Counter(note) - Counter(magazine)) == {}:
+                    return "Yes"
+                return "No"
+
+            if __name__ == '__main__':
+                mn = input().split()
+
+                m = int(mn[0])
+
+                n = int(mn[1])
+
+                magazine = input().rstrip().split()
+
+                note = input().rstrip().split()
+
+                print(checkMagazine(magazine, note))
+
+
+#### Given two strings, determine if they share a common substring. A substring may be as small as one character.
+#### For example, the words "a", "and", "art" share the common substring . The words "be" and "cat" do not share a substring.
+<!-- input: 2
+hello
+world
+hi
+world -->
+<!-- output:
+YES
+NO -->
+
+                # Complete the twoStrings function below.
+                def twoStrings(s1, s2):
+                    return 'YES' if set(list(s1)) & set(list(s2)) != set() else 'NO'
+
+#### Sherlock and Anagrams
+#### Two strings are anagrams of each other if the letters of one string can be rearranged to form the other string. Given a string, find the number of pairs of #### substrings of the string that are anagrams of each other.
+
+#### For example s=mom, the list of all anagrammatic pairs is  [m,m], [mo,om] at positions  (0,2) (0,1) (1,2) respectively.
+def sherlockAndAnagrams(s):
+    count = []
+    for i in range(1,len(s)+1):
+        a = ["".join(sorted(s[j:j+i])) for j in range(len(s)-i+1)]
+        b = Counter(a)
+        count.append(sum([len(list(combinations(['a'] * b[j],2))) for j     in b]))
+    return sum(count)
+
+
+
+#### counting triplets:
+<!-- https://www.hackerrank.com/challenges/count-triplets-1/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=dictionaries-hashmaps&h_r=next-challenge&h_v=zen -->
+
+
+
+
+        from collections import Counter
+
+        def countTriplets(arr, r):
+            r2 = Counter()
+            r3 = Counter()
+            count = 0
+
+            for v in arr:
+                if v in r3:
+                    count += r3[v]
+
+                if v in r2:
+                    r3[v*r] += r2[v]
+
+                r2[v*r] += 1
+
+            return count
+
+
+
+#### You are given  queries. Each query is of the form two integers described below:
+- 1 x : Insert x in your data structure.
+- 2 y : Delete one occurence of y from your data structure, if present.
+- 3 z : Check if any integer is present whose frequency is exactly z. If yes, print 1 else 0.
+<!-- https://www.hackerrank.com/challenges/frequency-queries/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=dictionaries-hashmaps&h_r=next-challenge&h_v=zen -->
+<!-- works but run time error for some: -->
+def freqQuery(queries):
+    output = []
+    three_out = []
+    for operation in queries:
+        if operation[0] == 1:
+            output.append(operation[1])
+        elif operation[0] == 2:
+            output.remove(operation[1])
+        else:
+            if operation[1] in Counter(output).values():
+                three_out.append(1)
+            else:
+                three_out.append(0)
+    return three_out
+
+    def freqQuery(queries):
+        # freq is count of all elements added with operation 1 & 2
+        freq = Counter()
+        cnt = Counter()
+        result = []
+        for action, value in queries:
+            if action == 1:
+                cnt[ freq[value] ] -= 1
+                freq[value] += 1
+                cnt[ freq[value] ] += 1
+                # return freq, cnt
+            elif action == 2:
+                if freq[value] > 0:
+                    cnt[ freq[value] ] -= 1
+                    freq[value] -= 1
+                    cnt[ freq[value] ] += 1
+                    return freq, cnt
+            else:
+                result.append(1 if cnt[value] > 0 else 0)
+        return result
+
+
+
+####SORTING:
+#### Bubble sort algorithm:
+#### compare the current index with the following, if it is higher, then swap elements
+<!-- https://www.hackerrank.com/challenges/ctci-bubble-sort/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=sorting -->
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the countSwaps function below.
+def countSwaps(a):
+    numSwaps = 0
+    while True:
+        SwapsFlag = False
+        for i in range(len(a)-1):
+            if a[i] > a[i+1]:
+                a[i], a[i+1] = a[i+1], a[i]
+                numSwaps += 1
+                SwapsFlag = True
+        if not SwapsFlag:
+            break
+    print('Array is sorted in', numSwaps, 'swaps.')
+    print('First Element:', a[0])
+    print('Last Element:', a[-1])
+
+
+if __name__ == '__main__':
+    n = int(input())
+
+    a = list(map(int, input().rstrip().split()))
+
+    countSwaps(a)
+
+#### Mark and Toys
+
+
+# Complete the maximumToys function below.
+#Given a list of prices and an amount to spend, what is the maximum number of toys Mark can buy? For example, if prices = [1,2,3,4] and Mark has k=7 to spend, he can buy items [1,2,3] for 6, or [3,4] for 7 units of currency. He would choose the first group of  items.
+<!-- https://www.hackerrank.com/challenges/mark-and-toys/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=sorting -->
+def maximumToys(prices, k):
+    # first get a sorted array
+    prices.sort()
+    count = 0
+    for i in prices:
+        if (i <= k):
+            count += 1
+            # spent money so decrease pot by what was spent
+            k -= i
+        else:
+            break
+    return count
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    nk = input().split()
+
+    n = int(nk[0])
+
+    k = int(nk[1])
+
+    prices = list(map(int, input().rstrip().split()))
+
+    result = maximumToys(prices, k)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()
+
+#### Sorting: Comparator
+<!-- https://www.hackerrank.com/challenges/ctci-comparator-sorting/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=sorting -->
+Declare a Checker class that implements the comparator method as described. It should sort first descending by score, then if 2 have the
+same score, ascending by name. The code stub reads the input, creates a list of Player objects, uses your method to sort the data, and prints it out properly.
+
+from functools import cmp_to_key
+class Player:
+    def __init__(self, name, score):
+        self.name = name
+        self.score=score
+
+    def comparator(a, b):
+        if a.score > b.score:
+            return -1
+        elif a.score < b.score:
+            return 1
+        if a.name < b.name:
+            return -1
+        else:
+            return 1
+
+n = int(input())
+data = []
+for i in range(n):
+    name, score = input().split()
+    score = int(score)
+    player = Player(name, score)
+    data.append(player)
+
+data = sorted(data, key=cmp_to_key(Player.comparator))
+for i in data:
+    print(i.name, i.score)
+
+@TODO: this one!
+#### Fraudulent activity notifications
+<!-- https://www.hackerrank.com/challenges/fraudulent-activity-notifications/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=sorting -->
+
+
+
+#### Merge Sort: Counting Inversions basically just like the bubble sort count But
+#### we want faster execution time
+<!--
+Sample input:
+2  
+5  
+1 1 1 2 2  
+5  
+2 1 3 1 2
+Sample output:
+0  
+4   
+-->
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the countInversions function below.
+def countInversions(arr):
+    res = [0] * len(arr)
+
+    return merge(arr, res, 0, len(arr)-1)
+
+
+def merge(arr, res, left, right):
+    if left >= right:
+        return 0
+
+    inversions = 0
+
+    left_end = (left + right) // 2
+    right_start = left_end + 1
+
+    inversions += merge(arr, res, left, left_end)
+    inversions += merge(arr, res, right_start, right)
+    inversions += mergeHalf(arr, res, left, right)
+    return inversions
+
+
+def mergeHalf(arr, res, left, right):
+    if left >= right:
+        return 0
+
+    inversions = 0
+
+    left_end = mid = (left + right) // 2
+    right_start = right_beg = left_end + 1
+    left_beg = index = left
+
+    while left <= left_end and right_start <= right:
+        pt1 = arr[left]
+        pt2 = arr[right_start]
+
+        if pt1 <= pt2:
+            res[index] = pt1
+            index += 1
+            left += 1
+        else:
+            res[index] = pt2
+            index += 1
+            inversions += mid - left + 1
+            right_start += 1
+
+    while left <= left_end:
+        res[index] = arr[left]
+        left += 1
+        index += 1
+
+    while right_start <= right:
+        res[index] = arr[right_start]
+        right_start += 1
+        index += 1
+
+
+    arr[left_beg:left_end + 1] = res[left_beg:left_end + 1]
+    arr[right_beg:right + 1] = res[right_beg: right + 1]
+
+    return inversions
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    t = int(input())
+
+    for t_itr in range(t):
+        n = int(input())
+
+        arr = list(map(int, input().rstrip().split()))
+
+        result = countInversions(arr)
+
+        fptr.write(str(result) + '\n')
+
+    fptr.close()
+
+
+
+
+####STRING MANIPULATION:
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the makeAnagram function below.
+# input is two strings
+# output: single integer denoting the number of characters you must delete to make the two strings anagrams of each other. Anagrams is when they contain the same letters, in a different order or not.
+<!-- eg:
+input:
+cde
+abc
+output:
+4
+we have to delete d, e, a and b to make the words anagrams-->
+
+from string import ascii_lowercase
+
+def makeAnagram(a, b):
+    count = 0
+    for letter in ascii_lowercase:
+        ia = a.count(letter)
+        ib = b.count(letter)
+        # add to the count var the difference between the count of a specific letter
+        #
+        count += abs(ia - ib)
+    return count
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    a = input()
+
+    b = input()
+
+    res = makeAnagram(a, b)
+
+    fptr.write(str(res) + '\n')
+
+    fptr.close()
+
+#Alternating characters
+<!-- https://www.hackerrank.com/challenges/alternating-characters/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=strings&h_r=next-challenge&h_v=zen -->
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the alternatingCharacters function below.
+# Output: For each query, print the minimum number of deletions required on a new line.
+
+
+<!--
+Input:
+5
+AAAA
+BBBBB
+ABABABAB
+BABABA
+AAABBB
+Output:
+3
+4
+0
+0
+4
+ -->
+
+def alternatingCharacters(s):
+    deletions = 0
+    for i in range(len(s)):
+        try:
+            if s[i] == s[i+1]:
+                deletions+=1
+        except IndexError:
+            break
+    return deletions
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    q = int(input())
+
+    for q_itr in range(q):
+        s = input()
+
+        result = alternatingCharacters(s)
+
+        fptr.write(str(result) + '\n')
+
+    fptr.close()
+
+# Special String Again
+
+
+
+
+
+
+
+-- Challenges that I had: --
+ROLE = 061152
+
+import sys
+# order statistic:
+
+k = int(input())
+a = list(map(int, input().rstrip().split()))
+
+a.sort()
+print(a[k-1])
+
+
+# Recommender system:
+# input:
+# Bob:Rock,Blues,Jazz
+# Alice:Rock,Jazz,Blues
+# John:Jazz,Blues,Rock
+# Look for users with lower amount of inversions compared with the base users
+# This is the active user, aka the first line
+
+# This is an array for the reference users:
+
+queries = []
+# if know how many end users:
+# for _ in range(2):
+#     queries.append(list(map(str, input().rstrip().split())))
+while True:
+    try:
+        queries.append(list(map(str, input().rstrip().replace(':',',').split(','))))
+    except(EOFError):
+        break
+
+active = queries[0]
+
+num = list(range(1,len(queries[0])))
+
+dct = dict(zip(queries[0][1:], num))
+
+# remove the active user since we have the mapping already:
+queries = queries[1:]
+# extract the username
+untouched = [el[0] for el in queries]
+
+for i in range(0,len(queries)):
+    queries[i][1:] = list(map(dct.get, queries[i][1:]))
+
+# now lets calculate the minimum swaps:
+def countSwaps(a):
+    numSwaps = 0
+    while True:
+        SwapsFlag = False
+        for i in range(len(a)-1):
+            if a[i] > a[i+1]:
+                a[i], a[i+1] = a[i+1], a[i]
+                numSwaps += 1
+                SwapsFlag = True
+        if not SwapsFlag:
+            break
+    return numSwaps
+
+# print(queries)
+# let's count the number of swaps now:
+arr_swaps = []
+for i in range(len(queries)):
+    arr_swaps.append(countSwaps(queries[i][1:]))
+
+# make a dict with key: untouched and value: arr_swaps
+dict2 = dict(zip(untouched, arr_swaps))
+# sort dict per value:
+import operator
+
+# sort item per value
+output_sorted = sorted(dict2.items(), key= operator.itemgetter(1))
+
+# output the names, having been already sorted
+for i in output_sorted:
+    print(i[0], end=' ')
+
+
+
+# Normalize levels:
+# array of values, take the max, and modify the values in the array so that they are:
+# value*100/max
+
+queries = []
+while True:
+    try:
+        queries.append(list(map(int, input().rstrip().split(','))))
+    except(EOFError):
+        break
+
+def normalize_me(arr,max):
+    return [x*100/max for x in arr]
+
+normalized = []
+for arr in queries:
+    maximum = max(arr)
+    print(maximum)
+    normalized.append([x*100//maximum for x in arr])
+
+print(normalized)
+
+
+
+
+# Stock Trader - Bullish Cross
+# Programming challenge description:
+# A classic stock trading pattern happens when a 9-Day Moving Average (9-DMA) crosses the 50-Day Moving Average (50-DMA). This can be indicative of a bullish or a bearish setup, depending on the direction.
+#
+# When the 9-DMA crosses above the 50-DMA from below, it is Bullish. When the 9-DMA cross below the 50-DMA from above, it is Bearish.
+#
+# Write a program that reads in a series of dates and prices, calculates the 9-DMA and 50-DMA, then returns the dates of any bullish signals that occurred.
+#
+# NOTE: The Moving Average cannot be calculated for a given day if there is not enough historical data to cover the period in question. For example, a series of prices that begin on January 1 cannot have a 9-DMA calculated before January 9 since 9 days of historical prices do not exist until January 9.
+#
+# Input:
+# A series of Date|Price pairs in non-localized format. Dates will follow ISO 8601 format YYYY-MM-DD. Prices will be a two-decimal value with no currency indications.
+#
+# For example:
+#
+# 2016-01-01|22.05
+# 2016-01-02|22.45
+# 2016-01-03|23.57
+# Output:
+# A date in ISO 8601 format where a Golden Cross occurred. If no Golden Cross happened, return the string NULL
+
+
+
+# import sys
+# from statistics import mean
+#
+# arr = []
+# for line in sys.stdin:
+#     arr.append(line.rstrip())
+#
+#
+# # date is leftmost 10 elements of array of array
+# # print(len('2009-03-02'))
+# dates = [el.split('|')[0] for el in arr]
+# prices = [float(el.split('|')[1]) for el in arr]
+#
+#
+#
+# for i in range(50,len(dates)):
+#     count = 0
+#     # The prices of the day of also influence in the DMA
+#     # reasonable assumption: weekends do not matter, only look at trading days
+#     DMA_9 = mean(prices[i-8:i+1])
+#     DMA_50 = mean(prices[i-49:i+1])
+#     if DMA_9 > DMA_50:
+#         count+=1
+#         print(dates[i])
+#
+# if count==0:
+#     print('NULL')
+
+
+# Median of Medians
+# Input:
+# 3
+# 1 2 5 4 6 3 7 8
+# Output:
+# 4
+# 1. Divide the list into sublists with k elements. Last sublist may contain fewer than k elements
+# 2. Sort each sublist, get its median and append it to another list containing medians of sublists
+# 3. If the medians list has a length more than k, compute its median recursively, proceeding with step1
+# 4. If the medians list has k elements or fewer, sort it and determine its median. Return it as a pivot
+# If an array is of odd length, the median is the middle element after the array has been sorted.
+# If an array is of even legnth, there are two middle elements after it has been sorted. In this case,
+# we will define the median as the left (first) of these 2 middle elements.
+
+k = int(input())
+arr = list(map(int, input().split()))
+
+def get_median(arr):
+    arr.sort()
+    median = "ODD"
+    size = len(arr)
+    # case if even
+    if size%2 == 0:
+        median = arr[int((size/2)-1)]
+    else:
+        # int(2.9) will return 2 because int() truncates
+        median = arr[int(size/2)]
+    return median
+
+def median_of_medians(arr, k):
+    # 1. divide list into sublists of k elements
+    chunks = [arr[i * k:(i + 1) * k] for i in range((len(arr) + k - 1) // k )]
+    # 2. Append medians of sublists together
+    medians = list(map(get_median,chunks))
+    # 3. if medians list has length > k, compute its median recursively, proceeding with step1
+    if len(medians) > k:
+        median_of_medians(medians, k)
+# If the medians list has k elements or fewer, sort it and determine its median.
+# Return it as a pivot
+    else:
+        print(get_median(medians))
+
+median_of_medians(arr,k)
