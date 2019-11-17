@@ -841,6 +841,368 @@ if __name__ == '__main__':
     fptr.close()
 
 # Special String Again
+s = mnoopoo substrings are {m, n, o, o, p, o, o, non, ono, opo, oo}
+output must be number of words that can be formed:
+<!--
+input:
+4
+aaaa
+output:
+10: a,a,a,a, aa,aa,aa,aaa,aaa,aaaa -->
+<!-- https://www.hackerrank.com/challenges/special-palindrome-again/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=strings&h_r=next-challenge&h_v=zen&h_r=next-challenge&h_v=zen -->
+
+
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the substrCount function below.
+
+def triangular_number(n):
+    return (n**2+n)/2
+
+# 1) len(s) -> count all char of the word;
+# 2) exp1 -> count all words that follow this rule: a_a also aaaa_aaaa;
+# 3) exp2 -> count all repeated char of the word and with triangular number all combinations of these repeated chars. Example of this step is: aaaa has the combination of:
+# 'aa'+'aa'+'aa'+'aaa'+'aaa'+'aaaa' = 6 (realize 6 is the same T3 of triangular number sequence).
+def substrCount(n, s):
+    count = len(s)
+
+    exp1 = r'(([a-z])\2*)(?!\1)(?=[a-z]\1)'
+    m = re.finditer(exp1,s)
+    count += sum([len(x.group(0)) for x in m])
+
+    exp2 = r'([a-z])\1+'
+    m = re.finditer(exp2,s)
+    count += sum([triangular_number(len(x.group(0))-1) for x in m])
+
+    return count
+
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(input())
+
+    s = input()
+
+    result = substrCount(n, s)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()
+
+
+# Common child
+A string is said to be a child of a another string if it can be formed by deleting 0 or more characters from the other string. Given two strings of equal length, what's the longest string that can be constructed such that it is a child of both?
+
+For example, ABCD and ABDC have two children with maximum length 3, ABC and ABD. They can be formed by eliminating either the D or C from both strings. Note that we will not consider ABCD as a common child because we can't rearrange characters and ABCD different from ABDC.
+
+<!--
+input:
+SHINCHAN
+NOHARAAA
+output:
+3
+ -->
+
+ #!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+from collections import Counter
+
+# Complete the commonChild function below.
+def commonChild(s1, s2):
+    n, m = len(s1), len(s2)
+    lcs = [[0] * (m + 1) for _ in range(n + 1)]
+
+    for i, c1 in enumerate(s1):
+        for j, c2 in enumerate(s2):
+            if c1 == c2:
+                lcs[i][j] = lcs[i - 1][j - 1] + 1
+            else:
+                lcs[i][j] = max(lcs[i][j - 1], lcs[i - 1][j])
+
+    return lcs[n - 1][m - 1]
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    s1 = input()
+
+    s2 = input()
+
+    result = commonChild(s1, s2)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()
+
+
+# Greedy Algorithm
+
+# Minimum Absolute Difference in an Array
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the minimumAbsoluteDifference function below.
+# two solutions, more or less the same:
+# want to find minimum absolute difference between all elements in array
+<!-- https://www.hackerrank.com/challenges/minimum-absolute-difference-in-an-array/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=greedy-algorithms -->
+<!--
+input:
+5
+1 -3 71 68 17
+output:
+3
+-->
+
+def minimumAbsoluteDifference(arr):
+    arr.sort()
+    minus = math.inf
+    print(arr)
+    for i in range(1,len(arr)):
+        diff = abs(arr[i-1]-arr[i])
+        print(diff)
+        if diff < minus:
+            minus = diff
+            print('min: ' + str(min))
+    return minus
+
+
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(input())
+
+    arr = list(map(int, input().rstrip().split()))
+
+    result = minimumAbsoluteDifference(arr)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()
+
+
+
+def minimumAbsoluteDifference(arr):
+
+    arr.sort()
+
+    return min([abs(arr[counter+1] - arr[counter]) for counter in range(len(arr)-1)]
+
+
+
+# Luck Balance
+Lena is preparing for an important coding competition that is preceded by a number of sequential preliminary contests. Initially, her luck balance is 0. She believes in "saving luck", and wants to check her theory. Each contest is described by two integers,  and :
+
+ First number is the amount of luck associated with a contest. If Lena wins the contest, her luck balance will decrease by the second item; if she loses it, her luck balance will increase by the first item.
+ The second number enotes the contest's importance rating. It's equal to 1 if the contest is important, and it's equal to 0 if it's unimportant.
+If Lena loses no more than  important contests, what is the maximum amount of luck she can have after competing in all the preliminary contests? This value may be negative.
+<!-- https://www.hackerrank.com/challenges/luck-balance/problem?h_l=interview&playlist_slugs%5B%5D=interview-preparation-kit&playlist_slugs%5B%5D=greedy-algorithms -->
+
+<!-- input:
+6 3
+5 1
+2 1
+1 1
+8 1
+10 0
+5 0
+output:
+29
+There are 6 contests. Of these contests, 4 are important and she cannot lose more than 3 of them. Lena maximizes her luck if she wins the 3rd important contest (where L[i]=1) and loses all of the other five contests for a total luck balance of 5+2+8+10+5-1 = 29. -->
+
+2 solutions
+
+def luckBalance(k, contests):
+    # sort from greatest luck to least luck, so that can add them in importance
+    contests.sort(reverse=True)
+    luck = 0
+
+    for contest in contests:
+    # meaning if it is nonimportant to miss
+        if contest[1] == 0:
+            luck += contest[0]
+    # it is important to miss, check if we can miss it
+        elif k > 0:
+            luck += contest[0]
+            k -= 1
+        else:
+            luck -= contest[0]
+
+    return luck
+
+
+
+    #!/bin/python3
+
+    import math
+    import os
+    import random
+    import re
+    import sys
+
+    # Complete the luckBalance function below.
+    def luckBalance(k, contests):
+        # k is the number of important contests she can lose
+        # if it is unimportant, then can just lose it and get the luck value
+        # fail the most number of important ones, with the highest luck value
+
+        count = sum([el[0] for el in contests if el[1] == 0])
+
+        # fail k contests, but the ones with the most points
+        contests_win = [el[0] for el in contests if el[1] == 1]
+
+        # sorted sorts a list based on the first element
+        contests_win = sorted(contests_win, reverse = True)
+        # or t.sort(key=lambda x: x[0])reverse
+
+        count = count + sum(contests_win[:k]) - sum(contests_win[k:len(contests_win)])
+
+        return count
+
+    if __name__ == '__main__':
+        fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+        nk = input().split()
+
+        n = int(nk[0])
+
+        k = int(nk[1])
+
+        contests = []
+
+        for _ in range(n):
+            contests.append(list(map(int, input().rstrip().split())))
+
+        result = luckBalance(k, contests)
+
+        fptr.write(str(result) + '\n')
+
+        fptr.close()
+
+# Water count:
+<!-- https://leetcode.com/problems/container-with-most-water/solution/ -->
+We have to maximize the Area that can be formed between the vertical lines using the shorter line as length and the distance between the lines as the width of the rectangle forming the area.
+
+Approach1: Brute force:
+class Solution:
+    def maxArea(self, height: List[int]) -> int:
+
+        max_area = 0
+
+        for i in range(0,len(height)):
+            for j in range(i+1,len(height)):
+                max_area = max(max_area,min(height[i],height[j]) * (j-i))
+        return max_area
+
+Approach2: two pointer approach
+class Solution:
+    def maxArea(self, height: List[int]) -> int:
+
+        max_area = 0
+        l = 0
+        r = len(height)-1
+
+        while(l<r):
+            max_area = max(max_area,min(height[r],height[l]) * (r-l))
+
+            if (height[l] < height[r]):
+                l+=1
+            else:
+                r-=1
+        return max_area
+
+Idea:
+when have two pointers at the two ends,
+can only increase the area covered by moving the pointers if we increase the height
+of the pointers. Hence the lower of the two pointers will be changed for the next one
+and the area will be compared to the previous one.
+
+
+#Best time to buy a stock
+<!-- https://leetcode.com/problems/best-time-to-buy-and-sell-stock/ -->
+
+Say you have an array for which the ith element is the price of a given stock on day i.
+
+If you were only permitted to complete at most one transaction (i.e., buy one and sell one share of the stock), design an algorithm to find the maximum profit.
+
+Note that you cannot sell a stock before you buy one.
+
+Example 1:
+
+Input: [7,1,5,3,6,4]
+Output: 5
+Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
+             Not 7-1 = 6, as selling price needs to be larger than buying price.
+Example 2:
+
+Input: [7,6,4,3,1]
+Output: 0
+Explanation: In this case, no transaction is done, i.e. max profit = 0.
+
+
+Approach1 (Brute Force):
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        max_return = 0
+
+        for i in range(len(prices)):
+            for j in range(i+1,len(prices)):
+                if i < j:
+                    max_return = max(max_return, j-i)
+
+        return max_return
+
+Approach2 (one pass):
+IDEA: The points of interest are the peaks and valleys in the given graph. We need to find the largest peak following the smallest valley. We can maintain two variables - minprice and maxprofit corresponding to the smallest valley and maximum profit (maximum difference between selling price and minprice) obtained so far respectively.
+
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        minprice = math.inf
+        max_profit = 0
+
+        for i in range(len(prices)):
+                if prices[i] < minprice:
+                    minprice = prices[i]
+                elif (prices[i] - minprice > max_profit):
+                    max_profit = prices[i] - minprice
+
+        return max_profit
+
+#Given a sorted array and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.
+
+        You may assume no duplicates in the array.
+<!-- https://leetcode.com/problems/search-insert-position/submissions/ -->
+        class Solution:
+            def searchInsert(self, nums: List[int], target: int) -> int:
+                i=0
+                index=0
+                if target in nums:
+                    return nums.index(target)
+                else:
+                    while i <len(nums):
+                        if target > nums[i]:
+                            index=i+1
+                        i+=1
+                return index
+
+
 
 
 
@@ -1050,3 +1412,37 @@ def median_of_medians(arr, k):
         print(get_median(medians))
 
 median_of_medians(arr,k)
+
+
+
+
+
+Leetcode:
+<!-- https://leetcode.com/problems/integer-to-roman/submissions/ -->
+
+Symbol       Value
+I             1
+V             5
+X             10
+L             50
+C             100
+D             500
+M             1000
+
+Input: 3
+Output: "III"
+
+Input: 4
+Output: "IV"
+
+class Solution:
+    def intToRoman(self, num: int) -> str:
+        coding = zip([1000,900,500,400,100,90,50,40,10,9,5,4,1],
+        ["M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","I"]
+        )
+        result = []
+        for n, r in coding:
+            while num>=n:
+                result.append(r)
+                num -=n
+        return ''.join(result)
