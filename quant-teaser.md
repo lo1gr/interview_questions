@@ -190,8 +190,6 @@ IF they do NOT balance, THEN you know that whichever side is lower on the balanc
 
 
 
-SIG:
-
 #throw a die, as many euros as number on die.
 #How much would you pay:
 (1+2+3+4+5+6)/6 = 7*3/6
@@ -219,7 +217,7 @@ second roll expected: 3.5
 0.15m 10%
 
 pay 0.3m for the land dont know the house price. Profit:
-0.7*(10-0.3) + 0.2*(0.5-0.3) + 10% * (0.15-0.3) = 515k
+0.7*(1-0.3) + 0.2*(0.5-0.3) + 10% * (0.15-0.3) = 515k
   If we pay for the land without knowing how much it's worth, we make $515k on average
   If we know how much the land is worth, we buy it unless it's worth it; 300k, and on average we make
 700k * 0.7 + 200k * 0.2 = 530k  
@@ -227,6 +225,11 @@ Therefore the knowledge of how much the land is worth is 15k to us (anything mor
 
   Contract worth:   The value of the contract can be determined as a call option, with strike price 300,000, the expected payoff will be just
 0.7*700,000 + 0.2*200,000 + 0,1*0= 530,000.
+
+#How can I find the distance between two opposite corners of a cube?
+a is the length of a side say a = 10.
+Face diagonal: d = sqrt(a^2 + a^2) = sqrt(2(a^2))
+Main Diagonal (what we want): sqrt(2(a^2)+a^2) = sqrt(3(a^2)) = sqrt(3(100)) = sqrt(300)
 
 
 #You start out with 1 dollar and your friend starts out with  2 dollars. You bet 1 dollar until one of you runs out of money. You have a 2/3 chance of winning each bet. What is your chance of winning?
@@ -237,7 +240,7 @@ p = 4/7
 #How many ways to sit 6 people around round table?
 Do you consider the two seating arrangements above to be different? Because in the first chart, A is in the red chair, but in the second chart F is in the red chair. Yet A is still between F and B and so on.
 
-2 charts: 1 chart ABCDEF other FABCDE, just swithced spots.
+2 charts: 1 chart ABCDEF other FABCDE, just turned clockwise.
 If you view the two charts as different then there are 6!, or 720 seating charts. Because there are 6 choices for the red chair, but only 5 choices for blue, 4 choices for purple, and so on down… 6 x 5 x 4 x 3 x 2 x 1 = 6! = 720
 
 However if you view these two charts as the same then, there are only 5!, or 120 arrangements. Because if you lock in the relative positions there are 6 replications of A-B-C-D-E-F so take 6 x 5 x 4 x 3 x 2 x 1 and divide by 6, now you have 5 x 4 x 3 x 2 x 1 = 5! = 120.
@@ -400,10 +403,7 @@ Or else we can compute. The probability they are tied after 4 is 1−2𝑝. Thus
 Remark: The same argument applies if B has 𝑛 coins and A has 𝑛+1.
 
 
-#How can I find the distance between two opposite corners of a cube?
-a is the length of a side say a = 10.
-Face diagonal: d = sqrt(a^2 + a^2) = sqrt(2(a^2))
-Main Diagonal (what we want): sqrt(2(a^2)+a^2) = sqrt(3(a^2)) = sqrt(3(100)) = sqrt(300)
+
 
 
 
