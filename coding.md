@@ -1079,11 +1079,11 @@ def luckBalance(k, contests):
     if __name__ == '__main__':
         fptr = open(os.environ['OUTPUT_PATH'], 'w')
 
-        nk = input().split()
+        n, k = input().split()
 
-        n = int(nk[0])
+        n = int(n)
 
-        k = int(nk[1])
+        k = int(k)
 
         contests = []
 
@@ -1201,6 +1201,45 @@ class Solution:
                             index=i+1
                         i+=1
                 return index
+
+#Given an array A of integers, return the length of the longest arithmetic subsequence in A.
+
+#Recall that a subsequence of A is a list A[i_1], A[i_2], ..., A[i_k] with 0 <= i_1 < i_2 < ... < i_k <= A.length - 1, and that a sequence B is arithmetic if B[i+1] - B[i] are all the same value (for 0 <= i < B.length - 1).
+
+Example 1:
+
+Input: [3,6,9,12]
+Output: 4
+Explanation:
+The whole array is an arithmetic sequence with steps of length = 3.
+
+Input: [9,4,7,2,10]
+Output: 3
+Explanation:
+The longest arithmetic subsequence is [4,7,10].
+
+
+
+class Solution:
+    def longestArithSeqLength(self, A: List[int]) -> int:
+        dp = {}
+#         start at 2nd element of list (index 1)
+        for i, a2 in enumerate(A[1:], start=1):
+            print('i:' + str(a2) + ' ' + str(i))
+#             start at 1st element at list and always go back to the first one and iterate until i
+            for j, a1 in enumerate(A[:i]):
+                print('j:' + str(a1) + ' ' + str(j))
+                d = a2 - a1
+                print('jd' + str(j) +'-' + str(d))
+                if (j, d) in dp:
+                    print('add')
+                    dp[i, d] = dp[j, d] + 1
+                    print(dp)
+                else:
+                    print('new')
+                    dp[i, d] = 2
+                    print(dp)
+        return max(dp.values())
 
 
 
@@ -1451,7 +1490,7 @@ class Solution:
 
 
 #Given a string containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
-
+<!-- https://leetcode.com/problems/valid-parentheses/ -->
 An input string is valid if:
 
         Open brackets must be closed by the same type of brackets.
@@ -1474,3 +1513,237 @@ An input string is valid if:
 
         Input: "([)]"
         Output: false
+
+class Solution:
+    def isValid(self, s: str) -> bool:
+        stack = []
+        for char in s:
+            if char == "(" or char == "{" or char == "[":
+                stack.append(char)
+            elif len(stack) <= 0:
+                return False
+            elif char == ")" and stack.pop() != "(":
+                return False
+            elif char == "]" and stack.pop() != "[":
+                return False
+            elif char == "}" and stack.pop() != "{":
+                return False
+        if len(stack) == 0:
+            return True
+        return False
+
+
+#You are given a string S and a number of elements n.
+#Your task is to print all possible permutations of size n of the string in lexicographic sorted order.
+<!-- https://www.hackerrank.com/challenges/itertools-permutations/problem -->
+from itertools import permutations
+
+s, n = input().split()
+print(* [''.join(i) for i in permutations(sorted(s),int(n))],sep='\n')
+
+#Print combinations  
+<!-- https://www.hackerrank.com/challenges/itertools-combinations/problem -->
+input:
+HACK 2
+
+output:
+A
+C
+H
+K
+AC
+AH
+AK
+CH
+CK
+HK
+
+from itertools import combinations
+
+a, b = input().split()
+
+[print("".join(i)) for x in range(1, int(b)+1) for i in combinations(sorted(a), x)]
+
+
+# use itertools combination
+input:
+4
+a a c d
+2
+
+Output:
+
+0.8333
+
+Explanation
+
+All possible unordered tuples of length 2 comprising of indices from 1 to 4 are:
+(1,2),(1,3),(1,4),(2,3),(2,4),(3,4)
+
+Out of these 6 combinations, 5 of them contain either index 1 or index 2 which are the indices that contain the letter 'a'.
+
+Hence, the answer is 5/6.
+
+<!-- https://www.hackerrank.com/challenges/iterables-and-iterators/problem -->
+
+from itertools import combinations
+
+N = int(input())
+L = input().split()
+K = int(input())
+
+C = list(combinations(L, K))
+F = filter(lambda c: 'a' in c, C)
+print("{0:.3}".format(len(list(F))/len(C)))
+
+
+# Maximization problem:
+Maximize S = (f(X1 +f(X2) + ...)%M)
+<!-- https://www.hackerrank.com/challenges/maximize-it/problem -->
+Input:
+3 1000
+2 5 4
+3 7 8 9
+5 5 7 8 9 10
+
+Output:
+206
+
+Explanation:
+says will be 3 arrays, will be modulo 1000. each lists contains 2, 3, 5 elements respectively.
+Picking 5 from the 1st list, 9 from the 2nd list and 10 from the 3rd list gives the maximum S value equal to
+(5^2+9^2+10^2)%1000 = 206.
+
+
+from itertools import product
+
+K,M = map(int,input().split())
+N = (list(map(lambda x: int(x)** 2, input().split()))[1:] for _ in range(K))
+results = map(lambda x: sum(x)%M, product(* N))
+print(max(results))
+
+#output symmetric differences:
+<!-- https://www.hackerrank.com/challenges/symmetric-difference/problem -->
+Input:
+4
+2 4 5 9
+4
+2 4 11 12
+Output:
+5
+9
+11
+12
+
+a,b = [set(input().split()) for _ in range(4)][1::2]
+print(* sorted(a^b, key=int), sep='\n')
+
+a^b = a.difference(b)
+key=int means calls int on each item before doing the sorted
+
+#Check strict superset
+<!-- https://www.hackerrank.com/challenges/py-check-strict-superset/problem -->
+input format:
+The first line contains the space separated elements of set A.
+The second line contains integer n, the number of other sets.
+The next n lines contains the space separated elements of the other sets.
+
+Input:
+1 2 3 4 5 6 7 8 9 10 11 12 23 45 84 78
+2
+1 2 3 4 5
+100 11 12
+
+Output:
+False
+
+<!-- get the first set -->
+a = set(map(str, input().split()))
+output = "True"
+<!-- iterate the number of times required to get all the arrays -->
+for i in range(int(input())):
+     if a.issuperset(set(map(str, input().split(' ')))) == False:
+         output = "False"
+print(output)
+
+#Check subset:
+Sample Input
+3
+5
+1 2 3 5 6
+9
+9 8 5 6 3 2 1 4 7
+1
+2
+5
+3 6 5 4 1
+7
+1 2 3 5 6 8 9
+3
+9 8 2
+
+Sample Output
+True
+False
+False
+
+The first line will contain the number of test cases, T.
+The first line of each test case contains the number of elements in set A.
+The second line of each test case contains the space separated elements of set A.
+The third line of each test case contains the number of elements in set B.
+The fourth line of each test case contains the space separated elements of set B.
+
+<!-- https://www.hackerrank.com/challenges/py-check-subset/problem -->
+testo = [set(input().split()) for _ in range(int(input())*4)][1::2]
+
+output = []
+for i in range(0,len(testo),2):
+    output.append(str(testo[i].issubset(testo[i+1])))
+print(* output, sep='\n')
+
+Other solution:
+
+for i in range(int(input())):
+    _ , a = input(), set(map(int, input().split()))
+    _ , b = input(), set(map(int, input().split()))
+    print(a.issubset(b))
+
+#Dot and Cross:
+input format:
+The first line contains the integer N.
+The next N lines contains N space separated integers of array A.
+The following N lines contains N space separated integers of array B.
+
+Sample input:
+2
+1 2
+3 4
+1 2
+3 4
+
+Sample output:
+[[ 7 10]
+ [15 22]]
+
+import numpy
+a=int(input())
+arr1=numpy.array([list(map(int,input().split())) for _ in range(a)])
+arr2=numpy.array([list(map(int,input().split())) for _ in range(a)])
+print(numpy.dot(arr1,arr2))
+
+
+
+
+n = int(input())
+s = set(map(int, input().split()))
+for i in range(int(input())):
+    eval('s.{0}({1})'.format(* input().split()+['']))
+
+print(sum(s))
+
+
+input().split() will produce list with entered values, i.e. ['remove', '5'] or ['pop']. adding a list with empty value will ensure that there are always 2 elements in list, at least.
+
+So ['remove', '5'] + [''] = ['remove', '5', ''] and ['pop'] + [''] = ['pop', '']
+
+Since format string uses only first 2 positional arguments , in first case '' will be ignored.

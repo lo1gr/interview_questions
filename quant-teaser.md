@@ -404,6 +404,26 @@ Remark: The same argument applies if B has 𝑛 coins and A has 𝑛+1.
 
 
 
+#You choose one of two identical looking bags at random. One bag has three black marbles and one white marble. The other has three white marbles and one black marble. After choosing a bag you draw one marble out at random. You notice it is black. You then put it back and draw another marble out of the same bag at random. What is the probability that the second marble drawn is black?
+
+
+Answer
+The probability is 5/8.
+
+The probability of event A happening given that event B already happened is the probability of A and B happening divided by the probability that B happened. This can be expressed as Pr(A|B)=Pr(A and B)/Pr(B).
+In this case A is drawing a black marble and B is having already drawn a black marble.
+
+Pr(A and B) = (1/2) * [(3/4)2 + (1/4)2] = 5/16.
+
+Pr(B) = 1/2.
+
+Pr(A|B) = Pr(A and B)/Pr(B) = (5/16)/(1/2) = 10/16 = 5/8.
+
+
+#In how many different ways can you rearrange the letters in the word "CHICAGO"?
+
+Answer
+At first glance, the response may seem to be simply 7!, or 5040. However, duplicates of the letter "C" poses a problem in the response. Any combination of letters, such as "ICCHOGA" can be created with C#1 coming first followed by C#2 or with C#2 preceding C#1. Any distinct possibility comes in pairs such as this. Therefore, to get rid of all duplicates, we divide 5040 (7!) in half to arrive at 2520, the answer to this problem.
 
 
 
@@ -413,3 +433,65 @@ lambda is the mean -> the number expected
 - Permutations are for lists (order matters) and combinations are for groups (order doesn't matter).
 combination: n choose k: n!/[k!(n-k)!]
 permutation: n!/(n-k)!
+
+
+
+
+IMC:
+
+# How long to swim from Amsterdam to NY?
+6,000 km
+swimmer: 1 km in 30min
+2km h
+
+6,000/2 = 3,000 swim hours
+8h of swim per day:
+
+3,000 / 8 = 375 days
+
+
+# You have a 4x4 grid, and three balls. If you manage to get "at least" 2 balls in the same row/column, you win. What is the probability to win ?
+if assume that 2 or 3 balls can be on the same square:
+proba win = 1 - proba lose  
+if 1st ball is placed, second ball is a "lose" in 9/16 cases
+if 1st ball placed and second ball placed, and it is a lose, then the last ball is a lose in
+4/16 cases (count them)
+
+1 - (9/16 * 4/16) = 55/64
+if no ball can be on the same square:
+1 - (9/15 * 4/14) = 1 - 18/105 = 87/105 = 29/35   (multiples of 3)
+
+
+|  |  |  |  |
+|  |  |  |  |
+|  |  |  |  |
+|  |  |  |  |
+
+#If a family has two children, and we know that one is a girl, what is the probability that the family has two girls?
+gg
+bb
+gb
+bg
+
+1/3
+
+#What is the chance you throw an increasing sequence when you throw a dice three times?
+By implication, the numbers are all different.
+There are 20 ways to choose three different numbers from six:
+combination: 6C3 = 6!/(3! * (6-3)!) = 20, and once they are chosen there is only one valid order, i.e. there are 20 allowable ordered choices.
+
+So the probability is 20/216=5/54.
+
+#In how many ways can 5 identical balls be placed in a (3x3) grid such that each row contains at least one ball?
+1) Total ways of selecting 5 places out of 9 = 9C5 = 9!/(5!4!) = 126
+
+2) ways in which the 5 places are in just two rows..
+Selecting 2 rows out of 3=3C2=3.
+These two rows have 6 cells, so choosing 5 out of 6 cells=6C5=6.
+So total ways in which the balls are NOT in all three= 3*6=18.
+
+Ways in which the balls are in all three cells=126-18=108
+
+
+Graph of a long call ? what is the profit if underlying keeps increasing ? what is loss ?
+Graph of a short put ? same question. Why do people use these puts with such a small profit ?
