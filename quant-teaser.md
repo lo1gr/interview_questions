@@ -479,6 +479,7 @@ bg
 By implication, the numbers are all different.
 There are 20 ways to choose three different numbers from six:
 combination: 6C3 = 6!/(3! * (6-3)!) = 20, and once they are chosen there is only one valid order, i.e. there are 20 allowable ordered choices.
+There are 6^3 = 216 possibilities for the results of throwing dice.
 
 So the probability is 20/216=5/54.
 
@@ -491,6 +492,50 @@ These two rows have 6 cells, so choosing 5 out of 6 cells=6C5=6.
 So total ways in which the balls are NOT in all three= 3*6=18.
 
 Ways in which the balls are in all three cells=126-18=108
+
+
+#Tom has six pairs of black gloves and six pairs of brown gloves in her drawer. In complete darkness, how many gloves must she take from the drawer in order to be sure to get a pair that match?
+He could possibly take out 6 black left hand gloves and then 6 brown left hand gloves, the next one would have to be either the black right hand or brown right hand match.
+
+
+# in a room of n people, how many handshakes possible? Cannot handshake own hand. eg n =25
+answer = n(n-1)/2
+First person can shake hands w n-1 people, second n-2...
+(n-1) + (n-2) + ... + 2 + 1
+
+for n = 25:
+24 + 23 + ... + 2 + 1 = 24 * (1+24)/2 = 300
+
+
+#A group of about twenty friends decide to exchange gifts as secret Santas. Each person writes their name on a piece of paper and puts it in a hat and then each person randomly draws a name from the hat to determine who has them as their secret Santa.
+#What is the probability that at least one person draws their own name?
+step1 : Total number of draws
+First, let us count the number of possible draws for a group of size n. The first person can select any of the n names. The second person can select any of the remaining n – 1 names the first person did not pick. The third person is left with n – 2 names, and the pattern continues.
+n * (n-1) * ... * 2 * 1
+= n!
+
+step2: Total number unsuccessful draws:
+@ least 1 person gets own name: C(n,1) ways, remaining have (n-1)! possibilities => C(n,1) * (n-1)!
+@ least 2 people get own names: C(n,2) ways, remaining have (n-2)! possibilities => C(n,2) * (n-2)!
+@ least k people get own names: C(n,k)(n-k)! = n!/k! possiblities
+
+avoid double counting: inclusion exclusion technique
+Unsuccessful draws = “at least 1” – “at least 2” + “at least 3” + … + (-1)n+1(“at least n“)
+
+Since “at least k” is equal to n!/k!, we have:
+
+Unsuccessful draws possibilites = n!/1! – n!/2! + … + (-1)^(n+1)n!/n!
+Factor n! to get: n!(1/1! - 1/2! + ... + (-1)^(n+1)/n!)
+
+Step3: probability successful draw
+probability unsuccessful draw: n!(1/1! - 1/2! + ... + (-1)^(n+1)/n!)/n! = (1/1! - 1/2! + ... + (-1)^(n+1)/n!)
+
+Pr(Successful) = 1/2! + … + (-1)n/n!
+Recalling e^x = 1 + x + x^2/2 + ...
+if substitute x = -1 then get:
+e^(-1) = 1/2! – 1/3! + 1/4! + … +
+= 1/e = 37%
+
 
 
 Graph of a long call ? what is the profit if underlying keeps increasing ? what is loss ?
