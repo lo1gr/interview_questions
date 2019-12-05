@@ -148,7 +148,7 @@ In 12 h the hands cross 11 times.
 so they cross 1 time in 12/11 * 3600 = 3927.2727 = 65 min 27 sec.
 1h 5min 27sec => 22times
 
-The answer is 22. The angular speed of the minute hand is 360°/hr, whereas the angular speed of the hour hand is 30°/hr. The hands overlap when the difference in the angles swept by the hands is a multiple of 360°, and the angles swept over an amount of time by the hands are given by the formula angle swept = time * angular speed. In other words, 360°/hr*t – 30°/hr*t = n360°, where t is time in hours and n is some integer. You can simplify this to 330°/hr*t = n360°, and then n=11t/12hr. There are 24 hours in a day, so n = 22, which is the total number of times the hands overlap. Therefore, the hands do NOT overlap at 1:05 (30° from 12), 2:10 (60° from 12), etc, they overlap at the t’s that correspond to 30° + 30° * 1/11 (slightly after 1:05), 60° + 30° * 2/11 (slightly after 2:10), etc. The last overlap would be at angle of 330° + 30° * 11/11, which = 360°, or a full cycle. Thus, 11 overlaps in 12 hours, 22 overlaps in 24 hours.
+The answer is 22. The angular speed of the minute hand is 360°/hr, whereas the angular speed of the hour hand is (360/12=30) 30°/hr. The hands overlap when the difference in the angles swept by the hands is a multiple of 360°, and the angles swept over an amount of time by the hands are given by the formula angle swept = time * angular speed. In other words, 360°/hr*t – 30°/hr*t = n360°, where t is time in hours and n is some integer. You can simplify this to 330°/hr*t = n360°, and then n=11t/12hr. There are 24 hours in a day, so n = 22, which is the total number of times the hands overlap. Therefore, the hands do NOT overlap at 1:05 (30° from 12), 2:10 (60° from 12), etc, they overlap at the t’s that correspond to 30° + 30° * 1/11 (slightly after 1:05), 60° + 30° * 2/11 (slightly after 2:10), etc. The last overlap would be at angle of 330° + 30° * 11/11, which = 360°, or a full cycle. Thus, 11 overlaps in 12 hours, 22 overlaps in 24 hours.
 
 #### 15. There is a car auction. The price of the car is uniform [0,1000], you do not know the actual value of the car. If you bid higher than the value of the car you get it, if you bid lower than the value of the car you don’t. If you know you can sell it on afterwards for x times its worth, what should you should you bid when: x=1.5 (e.g. For x=1.5, you bid 100, the car is worth 80, you get it and sell it on for 120, which is a 20 profit).
 x = 1.5. Let's map the PNL from 0 -> 1000:
@@ -195,14 +195,62 @@ IF they do NOT balance, THEN you know that whichever side is lower on the balanc
 (1+2+3+4+5+6)/6 = 7*3/6
 pay: 21/6 = 3.5
 
-#now throw a die, if happy take euro, otherwise reroll:
+#now throw a die, if happy take euro, otherwise reroll, can reroll twice:
 Since expected payoff is 3.5 if get 4 or more we keep, if get 3 or less reroll:
-1/2*5
-first roll 1-3: 1/2 * 2     
-second roll expected: 3.5
+We choose reroll when our payoff is < expected payoff from next reroll
+Thus take 1st roll if it is 4 or better, reroll otherwise. Expected payoff:
+1/2 * 5 + 1/2 * 3.5 = 8.5/2 = 4.25
 
-1/2 * 3.5 + 1/2 * 5
-= 8.5/2 = 4.25
+Now we can reroll one more time.
+LEts start from the last roll:
+Roll1=R1 Roll2 = R2...
+
+E(R1 then the rest) = 1/6 * 6 + 1/6 * 5
+E(R2 then R3) = 4.25
+
+payoff is then: 2/6 * 5.5 + 4/6 * 4.25 = 8/3
+
+# There are 4 sealed boxes. There is 100 pounds in one box and the others are empty.
+# A player can pay X to open the box and take the contents as many times as they like.
+# Assuming this is a fair game, what is the value of X?
+
+E(cost) = X*P(win 1st try) + 2X*P(win 2nd try) + 3X*P(win 3rd try) + 4X*P(win 4th try)
+P(win 1st try) = 1/4
+P(win 2nd try) = 3/4 * 1/3
+P(win 3rd try) = 3/4 * 2/3 * 1/2
+P(win 4th try) = 3/4 * 2/3 * 1/2
+
+It is a fair game. Hence:
+100 = X(1/4) + 2X(1/4) + 3X(1/4) + 4X(1/4)
+100 = (10/4)X <==> 100 = 2.5X
+X = 40
+
+# I pick a number n from 1 to 100. If you guess correctly, I pay you $n and zero otherwise. How much would you pay to play this game?
+
+Suppose we just take 𝑛=3 for simplicity. Suppose the picker chooses 1 with probability 𝑝1, chooses 2 with probability 𝑝2, and 3 with probability 𝑝3. The selection of 𝑝1,𝑝2,𝑝3 constitutes the picker's strategy.
+
+The indifference criterion means that 1𝑝1 = 2𝑝2 = 3𝑝3. However, also 𝑝1 + 𝑝2 + 𝑝3 = 1. To solve, plug in and get
+𝑝1 + (1/2)𝑝1 + (1/3)𝑝1 = 1
+Hence, 𝑝1 = (1 + 1/2 + 1/3)^(-1). This is also the average amount that the guesser wins, regardless of which number guessed. This is also the expected value of the game.
+
+Our expected payout is then:
+(SUM(j=1 to 100) 1/j)^(-1)
+
+# Suppose you have a fair coin. You start with a dollar, and if you toss a H, your position doubles, if you toss T, your position halves. What is the expected value of the money you have if you toss infinitely.
+
+Let's calculate the expectation of 1 toss and then expand it to inifinity:
+E(X) = 1/2 * 2 + 1/2 * 1/2 = 5/4
+
+Provided the tosses are independent, the product of the expectationa is the expectation
+of the product.
+E(PROD (i= 1 to n) Xi) = Prod(i=1 to n) E(Xi) = (5/4)^n which tends to infinity.
+
+
+# Suppose we toss a fair coin, and let N denote the number of tosses until we get a head. (including the final toss).
+# What is E(N) and Var(N) ?
+E(N) = 2
+Var(N) = E(N^2) - [E(N)]^2 = 0
+
 
 
 # subarine throws a torpedo, 40% chance sink other boat. If send 2, proba of sinking other boat?
@@ -343,10 +391,11 @@ OR: just use P(Su | party) + P(Sa | party) =1
 8 ways to create tic tac toe  
 number of possibilities: 9C3 = 9!/(3!(9-3)!) = 84
 
-2/21 * 9 - 19/21 = -1/21
+8/84 * 9 - 76/84 = -4/84
+= 2/21 * 9 - 19/21 = -1/21
 
 If we play a game in which Player 1 picks a number 1-11, and then player 2 can add 1-11 to that (i.e. player 1 picks 5, player 2 can add to make it 6-16), what is the strategy to win this game if Player 1 wants to make 60?  
-1 12 24 36 48
+Make Player2 start, then player 1 wants: 12 24 36 48
 
 #If the chances of you seeing a shooting star outside within  one hour is 84 percent, what is the chance of you seeing at least one shooting star outside in 30 minutes?
 The probability that you don't see a star in an hour is 1 - 0.84 = 0.16 = 16%. This means that the probability you don't see a star in 30 min is 0.4 (since 0.4 * 0.4 = 0.16). This makes sense if you think of one hour as two subsequent 30 min intervals. So if the probability you don't see a star in 30 min is 40%, then the probability that you see at least one star in 30 min is 60%.
@@ -433,6 +482,37 @@ lambda is the mean -> the number expected
 - Permutations are for lists (order matters) and combinations are for groups (order doesn't matter).
 combination: n choose k: n!/[k!(n-k)!]
 permutation: n!/(n-k)!
+
+
+
+
+Whacky:
+#Question: Five pirates discover a chest containing 100 gold coins. They decide to sit down and devise a distribution strategy. The pirates are ranked based on their experience (Pirate 1 to Pirate 5, where Pirate 5 is the most experienced). The most experienced pirate gets to propose a plan and then all the pirates vote on it. If at least half of the pirates agree on the plan, the gold is split according to the proposal. If not, the most experienced pirate is thrown off the ship and this process continues with the remaining pirates until a proposal is accepted. The first priority of the pirates is to stay alive and second to maximize the gold they get. Pirate 5 devises a plan which he knows will be accepted for sure and will maximize his gold. What is his plan?
+
+To understand the answer, we need to reduce this problem to only 2 pirates. So what happens if there are only 2 pirates. Pirate 2 can easily propose that he gets all the 100 gold coins. Since he constitutes 50% of the pirates, the proposal has to be accepted leaving Pirate 1 with nothing.
+
+Now let’s look at 3 pirates situation, Pirate 3 knows that if his proposal does not get accepted, then pirate 2 will get all the gold and pirate 1 will get nothing. So he decides to bribe pirate 1 with one gold coin. Pirate 1 knows that one gold coin is better than nothing so he has to back pirate 3. Pirate 3 proposes {pirate 1, pirate 2, pirate 3} {1, 0, 99}. Since pirate 1 and 3 will vote for it, it will be accepted.
+
+If there are 4 pirates, pirate 4 needs to get one more pirate to vote for his proposal. Pirate 4 realizes that if he dies, pirate 2 will get nothing (according to the proposal with 3 pirates) so he can easily bribe pirate 2 with one gold coin to get his vote. So the distribution will be {0, 1, 0, 99}.
+
+Smart right? Now can you figure out the distribution with 5 pirates? Let’s see. Pirate 5 needs 2 votes and he knows that if he dies, pirate 1 and 3 will get nothing. He can easily bribe pirates 1 and 3 with one gold coin each to get their vote. In the end, he proposes {1, 0, 1, 0, 98}. This proposal will get accepted and provide the maximum amount of gold to pirate 5.
+
+
+#You are in a canoe in a swimming pool, and you have a penny in your
+pocket. You toss the penny into the water. What happens to the water level in
+the swimming pool?
+
+When the rock is in the boat, the weight of both the rock and boat is pressuring the water which causes the water level to rise. When the rock is at the bottom of the water, it displaces its volume in the water rather than the weight. Due to the fact that the rock’s density is greater than that of water and volume, the water level will fall.
+
+# There are one hundred coins on the table. You and an opponent take turns
+# removing 1, 2, 3, or 4 coins at a time. You win if there are no coins left at the
+# end of your turn. You may choose whether to go first or second. What do you
+# do and why?
+backward induction: remove 5 at every iteration:
+I want to get:
+95 90 85 80... 5 0
+So i start second.
+
 
 
 
@@ -537,6 +617,85 @@ e^(-1) = 1/2! – 1/3! + 1/4! + … +
 = 1/e = 37%
 
 
+# You have 100 quarters in a jar. One of the quarters is double sided (heads). You pick out a random quarter and flip it 7 times, and get all heads. What is the probability you picked the double sided quarter? Then, given that you flipped it 7 times with all heads, what is the probability that you'll get heads on the 8th flip?
+Bayesian probabilities:
+P( you picked double sided | you flipped 7 heads in a row) = P (7 heads in a row | double sided) P (double sided) / P(7 heads in a row)
 
-Graph of a long call ? what is the profit if underlying keeps increasing ? what is loss ?
-Graph of a short put ? same question. Why do people use these puts with such a small profit ?
+P(7 heads in a row | double sided) = 1
+P(double sided) = 1/100
+P(7 heads in a row) = (99/100) * (1/2)^7 + (1/100)
+
+Hence P (double sided) = 1/ (99/128 + 1) = 128/227
+
+Thus, the chance that the next flip will be heads is P(double sided) + P(one sided) * P(make head)
+= (128/227 + (227-128)/227 * 0.5)
+
+# Hundred tigers and one sheep are put on a magic island that only has grass. Tigers can live on grass, but they want to eat sheep. If a Tiger bites the Sheep then it will become a sheep itself. If 2 tigers attack a sheep, only the first tiger to bite converts into a sheep. Tigers don’t mind being a sheep, but they have a risk of getting eaten by another tiger. All tigers are intelligent and want to survive. Will the sheep survive?
+If there is 1 tiger, then it will eat the sheep because he does not need to worry about being eaten. Sheep will not survive.
+If there are 2 tigers, both of them knows that if one eats the Sheep, the other tiger will eat him. So, the sheep will survive.
+
+If there are 3 tigers, then they each of them knows that if one tiger eats up the sheep, then Iceland will be left with 1 sheep and 2 tigers and as shown in the previous case, the sheep will survive. Hence each tiger will try to eat up the sheep. The sheep will not survive.
+
+If there are 4 tigers, then the sheep will survive.
+
+And so on….
+
+So, If there are even number of tigers the sheep will survive, else it will die. Hence, if there are 100 tigers the sheep will survive.
+
+# There are 100 ropes in a bag. In each step, two rope ends are picked at random, tied together and put back into a bag. The process is repeated until there are no free ends.
+# What is the expected number of loops at the end of the process?
+
+Of the (2𝑛C2) ways of choosing two ends, 𝑛 of them result in the first case, so the first case has probability 𝑛/(2𝑛(2𝑛−1)/2)=1/(2𝑛−1). So the expected number of loops you add in the first step, when you start with 𝑛 ropes, is:
+
+First pick: probability pick the same rope is 1/(how many ends left) = 1/(2n-1)
+probability pick other rope is 1 - 1/(2n-1)
+(1/(2𝑛−1)) * 1 + (1−1/(2𝑛−1))* 0 = 1/(2𝑛−1)
+
+second pick: ?
+You remove 1 rope: either it is 'out of the market', or 2 ropes tied together
+n = n-1
+
+1/(2(n-1)-1) = 1/2n-3
+...
+
+After this, you start over with 𝑛−1 ropes. Since what happens in the first step and later are independent (and expectation is linear anyway), the expected number of loops is
+1/(2𝑛−1)+1/(2𝑛−3)+⋯+1/3+1 =
+
+n = 100 so:
+1 + 1/3 + 1/5 + 1/7 + ... + 1/(200-1)
+
+Hn = 1 + 1/2 + 1/3 + 1/4 + 1/5 + 1/6 + 1/7 + ... + 1/n
+Hn/2 = 1/2 + 1/4 + 1/6 + ... + 1/2n
+
+H(2n) = 1 + 1/2 + ... + 1/2n = 1 + 1/2 + ... + 1/200
+H(2n) = ln(200) + 0.57721567
+= 5.8755
+
+H(n)/2 = [ln(100) + 0.57721567]/2
+= 2.5912
+
+H(2n) - H(n)/2 = 3.28
+
+
+
+More or less closed form of harmonic series:
+Hn = ln(n) + y
+= ln(n) + 0.57721567
+
+Hn/2 = 2.5937
+
+
+
+
+# Trading in Amsterdam:
+
+# You’re driving and there is two traffic lights, each green for 100 secs and then red for 100 secs. You have a magic wand which turns red lights green, you can only use it once. With this wand, what is your expected waiting time ?
+
+waiting time in all these cases is 0: RG GG GR
+waiting time not 0: RR
+(1/2) * (1/2) * 50 = 12.5secs
+
+# There is a timer which tells you, when the light is red, when it turns green. What is the optimal strategy now?
+Expected waiting time if no wand and only one light:
+P(Red) * Expected waiting time if red
+= (1/2) * 50 = 25
