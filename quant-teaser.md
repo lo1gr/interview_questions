@@ -148,7 +148,9 @@ In 12 h the hands cross 11 times.
 so they cross 1 time in 12/11 * 3600 = 3927.2727 = 65 min 27 sec.
 1h 5min 27sec => 22times
 
-The answer is 22. The angular speed of the minute hand is 360°/hr, whereas the angular speed of the hour hand is (360/12=30) 30°/hr. The hands overlap when the difference in the angles swept by the hands is a multiple of 360°, and the angles swept over an amount of time by the hands are given by the formula angle swept = time * angular speed. In other words, 360°/hr*t – 30°/hr*t = n360°, where t is time in hours and n is some integer. You can simplify this to 330°/hr*t = n360°, and then n=11t/12hr. There are 24 hours in a day, so n = 22, which is the total number of times the hands overlap. Therefore, the hands do NOT overlap at 1:05 (30° from 12), 2:10 (60° from 12), etc, they overlap at the t’s that correspond to 30° + 30° * 1/11 (slightly after 1:05), 60° + 30° * 2/11 (slightly after 2:10), etc. The last overlap would be at angle of 330° + 30° * 11/11, which = 360°, or a full cycle. Thus, 11 overlaps in 12 hours, 22 overlaps in 24 hours.
+The answer is 22. The angular speed of the minute hand is 360°/hr, whereas the angular speed of the hour hand is (360/12=30)
+30°/hr. The hands overlap when the difference in the angles swept by the hands is a multiple of 360°, and the angles swept over an amount of time by the hands are given by the formula angle swept = time * angular speed. In other words, 360°/hr*t – 30°/hr*t = n360°, where t is time in hours and n is some integer.
+You can simplify this to 330°/hr*t = n360°, and then n=11t/12hr. There are 24 hours in a day, so n = 22, which is the total number of times the hands overlap. Therefore, the hands do NOT overlap at 1:05 (30° from 12), 2:10 (60° from 12), etc, they overlap at the t’s that correspond to 30° + 30° * 1/11 (slightly after 1:05), 60° + 30° * 2/11 (slightly after 2:10), etc. The last overlap would be at angle of 330° + 30° * 11/11, which = 360°, or a full cycle. Thus, 11 overlaps in 12 hours, 22 overlaps in 24 hours.
 
 #### 15. There is a car auction. The price of the car is uniform [0,1000], you do not know the actual value of the car. If you bid higher than the value of the car you get it, if you bid lower than the value of the car you don’t. If you know you can sell it on afterwards for x times its worth, what should you should you bid when: x=1.5 (e.g. For x=1.5, you bid 100, the car is worth 80, you get it and sell it on for 120, which is a 20 profit).
 x = 1.5. Let's map the PNL from 0 -> 1000:
@@ -699,3 +701,267 @@ waiting time not 0: RR
 Expected waiting time if no wand and only one light:
 P(Red) * Expected waiting time if red
 = (1/2) * 50 = 25
+Hence, if the waiting time at the first light > 25, we should use the wand bc wait now > expected wait next light.
+Otherwise, if the waiting time at the first light < 25, we should just wait and keep the wand bc wait now < expected wait next light.
+
+Expected waiting time now couple of new cases:
+R(>25)G: 1/2 * 3/4 * 1/2: p(red) * p(wait bw 25&100) * p(green) : 0
+R(<25)G | R(<25)R :1/2 * 1/4 * (25/2) = p(red) * p(wait bw 0 and 25) * expected wait time -> keep the wand so next light doesnt matter
+R(>25)R: 1/2 * 3/4 * 1/2 * 50 = p(red) * p(wait bw 25 & 100) * p(red after) * expected wait time if red and no wand
+
+Hence expected wait time now is:
+1/2 * 1/4 * (25/2) + 1/2 * 3/4 * 1/2 * 50 = 25/16 + (3/16)* 50 = 12.5/8 + 75/8 = 10.93
+
+
+28 trinquements dans une salle: combien de  personnes ?
+n(n-1)/2 = 28
+n^2-n = 56
+n = 8
+
+# Expected coin flips in order to get 2 heads in a row:
+X being the event 2 heads in a row:
+E(X) = 1/2(1+E(X|H)) + 1/2*(1+E(X))
+E(X|H) = 1/2*(1) + 1/2*(1+E(X)) = proba head * 1 flip + proba tail * 1 flip * #flips back original state
+
+Plugging back in:
+E(X) = 1/2(1+1/2*(1) + 1/2*(1+E(X))) + 1/2*(1+E(X))
+E(X) = 6
+
+or:
+outcomes: T, HT, HH
+x being the number of flips:
+x = 1/2 (x+1) + 1/4(x+2) + 1/4(2)
+x = 6
+
+# Expected coin flips in order to get 3 heads in a row:
+Consider the outomes 𝑇,𝐻𝑇,𝐻𝐻𝑇,𝐻𝐻𝐻. All but the last put you back to the start. So if 𝑥 is the expected number of tosses to get HHH we have:
+x = 1/2(x+1) + 1/4(x+2) + 1/8(x+3) + 1/8(3)
+x = 14
+
+
+# You cover the two squares diagonally opposite on a  chessboard, Using domino tiles, that are 2x1 squares, can you cover the remaining squares on the board?
+No you cannot. The easy way is to note that the two squares diagonally opposite have the same colour, and every tile covers one white and one black square.
+Each domino we set on the chessboard will always take 1 Black and 1 White square.Therefore, 31 dominos will take 31 white square and 31 black squares exactly. On this chessbord however, we must have 32 black and 30 white squares. Hence it is not possible to do so.
+
+
+
+# How many seconds in a year:
+24*365*60*60 = 31.536m
+#minutes in year:
+24*365*60 = 525.6k
+#hours in year
+24*365 = 8760
+
+I highly recommend all of the puzzles at GeekforGeeks:
+https://www.geeksforgeeks.org/puzzle-1-how-to-measure-45-minutes-using-two-identical-wires/
+
+# How do we measure forty-five minutes using two identical wires, each of which takes an hour to burn. We have matchsticks with us.
+0 minutes – Light stick 1 on both sides and stick 2 on one side.
+30 minutes – Stick 1 will be burnt out. Light the other end of stick 2.
+45 minutes – Stick 2 will be burnt out.
+
+#Two trains are on same track and they are coming toward each other. The speed of first train is 50 KMs/h and the speed of second train is 70 KMs/h. A bee starts flying between the trains when the distance between two trains is 100 KMs. The bee first flies from first train to second train. Once it reaches the second train, it immediately flies back to the first train … and so on until trains collide. Calculate the total distance travelled by the bee. Speed of bee is 80 KMs/h.
+
+Let the first train moves at u km/h
+second train moves at v km/h
+distance between trains be d km
+speed of bee is b km/h
+time taken by trains to collide = d/(u+v)
+distance travelled by bee = b*d/(u+v) = 80 * 100/(50+70) = 66.67(approx.)
+
+# In a Medical Laboratory, you have 240 Injections, one of which is for Anesthesia for a rat. After injecting, one rat fainted exactly in 24 hours. You have 5 rats whom you are willing to sacrifice in order to determine which injections contains the Anesthesia. How do you achieve this in 48 hours ?
+Let us number the Injections with 5 digit numbers consisting of 0, 1 and 2. Let us number the Rats as 1, 10, 100, 1000, 10000.
+
+Number 0 on a Injections represents the Anesthesia will not be inject to rat.
+Number 1 on a Injections represents the Anesthesia will be injected to rat on 1st day.
+Number 2 on a Injections represents the Anesthesia will be injected to rat on 2nd day (after 24 hours).
+
+
+
+The action corresponding to the digit in the unit place will be executed by rat numbered 1.
+The action corresponding to the digit in the tenth place will be executed by rat numbered 10.
+The action corresponding to the digit in the 100th place will be executed by rat numbered 100.
+The action corresponding to the digit in the 1000th place will be executed by rat numbered 1000.
+The action corresponding to the digit in the 10000th place will be executed by rat numbered 10000.
+
+Example: Let us say the Injection is numbered 11201. The Injections is injected on the first day to rat numbered 10000, 1000 and 1. It is injected on the second day to rat numbered 100. And it is not injected to rat numbered 10.
+
+So if the rat numbered 10000, 1000 and 1 faints within first 24 hours, rat numbered 100 faints in the next 24 hours and the rat numbered 10 does not faint, then the Anesthesia Injection has to be 11201.
+
+This way total number possible is,
+
+= 3 * 3 * 3 * 3 * 3 = 3^5 = 243 Injections
+So with the help of 5 rats and within 48 hours we will be able to find a Anesthesia Injection among 243 Injections.
+
+
+# You have 5 jars of pills. Each pill weighs 10 grams, except for contaminated pills contained in one jar, where each pill weighs 9 grams. Given a scale, how could you tell which jar had the contaminated pills in just one measurement?
+Take out 1 pill from jar 1, 2 pills from jar 2, 3 pills from jar 3, 4 pills from jar 4 and 5 pills from jar 5. Put all these 15 pills on scale. The correct weight is 150 (15*10). But one of the jars has contaminated pills. So the weight will definitely be less than 150. If the weight is 149 then jar 1 has contaminated pills because there is only one contaminated pill. If the weight is 148 then jar 2, if the weight is 147 then jar 3, if 146 then jar 4, if 145 then jar 5.
+
+# Consider a two-player coin game where each Player A and Player B gets the turn one by one. There is a row of even number of coins, and a player on his/her turn can pick a coin from any of the two corners of the row. The player that collects coins with more value wins the game. Develop a strategy for the player making the first turn i.e, Player A, such that he/she never loses the game. Note that the strategy to pick a maximum of two corners may not work. In the following example, the first player, Player A loses the game when he/she uses a strategy to pick a maximum of two corners.
+Suppose you are given the following rows of coins:
+
+18 20 15 30 10 14
+Coins at even places: 20, 30, 14
+Coins at odd places: 18, 15, 10
+These places are fixed independent of whether the choice of selection must begin from the left or the right-hand side.
+
+Step 1: Sum of all even placed coins = 20 + 30 + 14 = 64
+Step 2: Sum of all odd placed coins = 18 + 15 + 10 = 43
+Step 3: Comparing the even and the odd placed coins where EVEN > ODD
+
+Therefore, Player A must start selecting from the right-hand side and choose all the even-placed coins every time(here they are 14, 30 and 20). So first picker, Player A picks 14. Now, irrespective of whether the second Player B starts selecting from the left-hand side i.e., 18 or from the right-hand side i.e., 20, the even placed coins i.e., 14, 30 and 20 are booked for the Player A. Therefore, be any situation arise, the first picker Player A will always win the game.
+
+
+# There are 100 doors in a row, all doors are initially closed. A person walks through all doors multiple times and toggle (if open then close, if close then open) them in following way:
+In first walk, the person toggles every door
+In second walk, the person toggles every second door, i.e., 2nd, 4th, 6th, 8th, …
+In third walk, the person toggles every third door, i.e. 3rd, 6th, 9th, …
+………
+……….
+In 100th walk, the person toggles 100th door.
+
+A door is toggled in ith walk if i divides door number. For example the door number 45 is toggled in 1st, 3rd, 5th, 9th and 15th walk.
+The door is switched back to initial stage for every pair of divisors. For example 45 is toggled 6 times for 3 pairs (5, 9), (15, 3) and (1, 45).
+It looks like all doors would become closes at the end. But there are door numbers which would become open, for example 16, the pair (4, 4) means only one walk. Similarly all other perfect squares like 4, 9, ….
+
+So the answer is 1, 4, 9, 16, 25, 36, 49, 64, 81 and 100.
+
+
+#In a country, all families want a boy. They keep having babies till a boy is born. What is the expected ratio of boys and girls in the country?
+How I solved it, which might not be the right answer:
+X being the number of kids expected:
+
+X = 1 * proba get a boy + proba get a girl (1 + back to beginning: X)
+X = 1/2 * 1 + 1/2 * (1+X)
+X = 2
+Meaning the proportion would be 1:1
+
+# There are 1000 wine bottles. One of the bottles contains poisoned wine. A rat dies after one hour of drinking the poisoned wine. How many minimum rats are needed to figure out which bottle contains poison in hour.
+We need to figure out in hour. We need 10 rats to figure out the poisoned bottle. The result is based on binary number system. We get 10 using ⌈ Log21000 ⌉.
+The idea is to number bottles from 1 to 1000 and write their corresponding binary numbers on the bottle. Each rat is assigned a position in the binary numbers written on bottles. Let us take an example. Rat 1 represents first bit in every bottle, rat 2 represents second bit and so on. If rat numbers 5, 7 and 9 die, then bottle number 42 (Binary 0000101010) is poisoned.
+
+# There are 3 ants sitting on three corners of a triangle. All ants randomly pick a direction and start moving along edge of the triangle. What is the probability that any two ants collide?
+2 choices for each: 2^3 = 8 combos total. only 2 combinations lead to no collisions (all go clockwise or all counterclockwise)
+P(any 2 ants collide) = 1 - 2/8 = 3/4
+
+
+# You have 15 Rs with you. You go to a shop and shopkeeper tells you price as 1 Rs per chocolate. He also tells you that you can get a chocolate in return of 3 wrappers. How many maximum chocolates you can eat?
+Buy and eat 15 chocolates
+Return 15 wrappers and get 5 more chocolates.
+Return 3 wrappers, get 1 chocolate and eat it (keep 2 wrappers)
+Now we have 3 wrappers. Return 3 and get 1 more chocolate.
+So total chocolates = 15 + 5 + 1 + 1
+
+# How can you represent days of month using two 6 sided dice? You can write one number on each face of the dice from 0 to 9 and you have to represent days from 1 to 31, for example for 1, one dice should show 0 and another should show 1, similarly for 29 one dice should show 2 and another should show 9.
+Dice 1: 0 1 2 3 5 7
+Dice 2: 0 1 2 4 6 8
+Trick is that 9 could be made from the 6: can read from top of bottom hehe
+
+# You are blindfolded and 10 coins are place in front of you on table. You are allowed to touch the coins, but can’t tell which way up they are by feel. You are told that there are 5 coins head up, and 5 coins tails up but not which ones are which.
+# Can you make two piles of coins each with the same number of heads up? You can flip the coins any number of times.
+Make 2 piles with equal number of coins. Now, flip all the coins in one of the pile.
+
+# Three Employees want to know the average of their salaries. They are not allowed to share their individual salaries.
+1) X adds a Random Number and his salary and tells the sum to Y.
+2) Y also adds a Random Number and his salary to the sum told by X and tells new sum to Z.
+3) Z also adds a Random Number and his salary to the sum told by Y and tells new sum to X.
+4) X subtracts its random number from the sum told by Z and tells the new number to Y.
+5) Y subtracts its random number from the sum told by X and tells the new number to Z.
+6) Z subtracts its random number from the sum told by Y and announces the new number.
+The new number is now the sum of three salaries and average can be calculated by dividing the sum by 3.
+Finally, nobody knows the salary of others, but all know average.
+This can be extended to more than 3 employees also.
+
+# Given two hourglass of 4 minutes and 7 minutes, the task is to measure 9 minutes.
+At 0 minutes: Start both hourglasses at the same time.
+At 4 minutes: 4 minutes hourglass runs out and flip it. 7 minutes hourglass is left with 3 minutes.
+At 7 minutes: 4 minutes hourglass is left with 1 minute. 7 minutes hourglass runs out and flip it.
+At 8 minutes: 4 minutes hourglass runs out and 7 is filled with 6 minutes and 1 minute on the other side. Flip it as the sand is left with 1 minute.
+At 9 minutes: 7 minutes hourglass becomes empty from above side.
+
+# A newspaper made of 16 large sheets of paper folded in half. The newspaper has 64 pages altogether. The first sheet contains pages 1, 2, 63, 64. If we pick up a sheet containing page number 45. What are the other pages that this sheet contains?
+On the back of 45, it is 46. The pages are such that for each page p, 65-p will be also on the same page.
+Then,
+65-45 = 20
+65-46 = 19
+So the four pages in this sheet are 19, 20, 45, 46.
+
+# A car has 4 tyres and 1 spare tyre. Each tyre can travel a maximum distance of 20000 miles before wearing off. What is the maximum distance the car can travel before you are forced to buy a new tyre? You are allowed to change tyres (using the spare tyre) unlimited number of times.
+25000
+Divide the lifetime of spare tire into 4 equal part i.e., 5000 and swap it at each completion of 5000 miles distance.
+20k + 20k/4 = 25k
+
+# In year 2001 on October 2, 2001, the date in MMDDYYYY format was a palindrome (same forwards as backwards), 10/02/2001 -> “10022001”
+# When was the last palindrome date before 10/02/2001?
+One year can have only one palindrome as the year fixes the month and date too, so the year has to be less than 2001 since we already have the palindrome for 10/02. It can’t be any year in 1900 because that would result in a day of 91, same for 1800 down to 1400. it could be a year in 1300 because that would be the 31st day.
+So what’s the latest year in 1300 that would make a month?
+
+When you first look at it, 12th month comes to mind as we have to find the latest date, so it seems it would be 1321. But we have to keep in mind that we want the maximum year in 1300 century with a valid date, so lets think about 1390 that will give the date as 09/31, is this a valid date…? No, because September has only 30 days, so last will be the 31st August. Which means the correct date would be 08/31/1380.
+
+# You have got someone working for you for five days and a gold bar to pay him. You must give them a piece of gold at the end of every day. What are the fewest number of cuts to the bar of gold that will allow you to pay him 1/5th each day?
+2 cuts:
+After two cut there are three pieces of 1 unit and two 2 unit.
+On 1st day: Give him 1 unit.
+On 2nd day: Give him 2 unit and take back 1 unit.
+On 3rd day: Give him 1 unit (he already have 2 unit)
+On 4th day: Give him 2 unit and take back 1 unit.(he already have 2 unit)
+On 5th day: Give him 1 unit.(he already have  two 2 unit)
+
+
+# A man is allocated a task. He doubles the task done everyday. If the man completely does the task in 18 days, how many days did it take for the man to complete 25% of the task?
+100% of task = 18 days
+As he doubles the task everyday. So,
+50% of task = 17 days
+25% of task = 16 days.
+
+# A Lady (L) bought an item of Rs 100 from the Shopkeeper (C). She paid him through a 500 Rs Note. Realizing that he did not have change, the shopkeeper C got change for that note from another shopkeeper (S) and paid Rs 400 to the Lady.
+# After a few days, S realized that the note is fake, And this railed at C and took 500 Rs back from him.
+# So in this whole process how much money did C loose in the end?
+The total loss for shopkeeper = 500 ( given back to the person who had provided the change )
+
+Consider a transaction box, the lady came with a counterfeit 500 Rs note which can be considered of 0 value.
+Now the lady took the item (cost of the item 100 Rs ) and 400 Rs (the change given by shopkeeper(C) to the lady)
+from the transaction box, total of 500 Rs. Now the equivalent amount should be lost by someone, thus shopkeeper(C) lost 500 Rs. Another shopkeeper(S) gave 500 Rs and took back the same amount hence no loss for him.
+
+# Policeman decided to punish the Prisoner and asked him to make a statement. The Prisoner should make such a statement so that he would be alive.
+# If the statement is held true by Policeman, the Prisoner will be hanged to death and if the statement is held false, the Prisoner will be shot dead.
+The Prisoner said, ‘I will be shot dead’
+If Policeman says the statement is true, the Prisoner will be hanged to death which will make his statement false.
+If Policeman says the statement is false, the Prisoner will be shot dead which will make the statement true.
+
+# egg problem
+The next approach can reduce our worse case scenario by balancing the linear drops and our 10 floor drop increment. If getting to the higher floors means more drops overall, we need to decrease the drops we need to perform linearly. We’re essentially trying to make all possible scenarios take the same number of drops to solve.
+If we drop our first egg from floor x (10 in our 10 floor strategy), the linear portion of our strategy is x-1 (9 in the above strategy). Our drop count is:
+x + (x - 1)
+If the egg doesn’t break on the first drop our drop count increases by one, so we’ll need to remove a drop from our floor by floor drop count — the next drop should be from x-1 floors up. Every additional floor jump will need to have one less floor, so that when we get to the linear portion of the solution we’ll have one less floor to check. We continue removing one floor until we only have 1 floor to check:
+x + (x-1) + (x-2) + (x-3) + ... + 1
+Which simplifies to:
+x(x + 1)/2
+Because there are 100 floors in our problem, we solve for x when the entire summation is equal to 100:
+x(x + 1)/2 = 100
+And some math...
+x = 13.651
+This means we want to start dropping from floor 14, jump up 13 floors to drop from floor 27, jump up 12 floors to drop from floor 39, and so on. Our worst case scenario is then a drop count total of 14.
+
+
+# Question : 100 coins are lying flat on a table. 10 of them are heads up and 90 are tails up.You can’t see which one is which.How can we split the coins into two piles such that there are same number of heads up in each pile?
+
+Answer : Make 2 piles with 10 coins and 90 coins each. Now, flip all the coins in the smaller pile.
+
+# We are given an excel sheet which contains integers from 1 to 50, including both. However, the numbers are in a jumbled form and there is 1 integer missing. You have to write a code to identify the missing integer. Only the logic is required.
+We know that the sum of all the numbers from 1 to n is (n*(n+1)/2)
+Therefore, sum of all the numbers from 1 to 50 is:
+50*(50+1)/2  (Here, n = 50)
+  = 50*(51)/2
+  = 25*51
+  = 1275.
+Therefore, all we need to do is to sum all the integers present in the file and subtract the sum from 1275. The difference between 1275 and this sum would give us the missing integer.
+
+# There are 20 people standing in a line, one behind the other. Each is made to wear a hat, which can either be white or black. There can be any number of white or black hats between 0 and 20. Each person can see the hat of all the persons ahead of him in the line, but not those of the people standing behind. Each person is required to guess (loudly) the color of his/her own hat. The objective is for the group to get as many correct guesses as possible. The group is allowed to discuss and form a strategy before the exercise. What is the best strategy? What is the maximum number of correct guesses in this strategy?
+The person who stands last in the queue, behind everyone else, will count the number of white hats on the heads of the 19 people present ahead of him. If this number is even, he (loudly) guesses the hat on his head as ‘Black’. if the number is odd, he guesses ‘White’. The probability of the hat on his head being what he guessed is 50%. There is no way this person can guess the hat on his head correctly. However, his guess functions as a message to others in front of him.
+Suppose the 20th person guesses ‘Black’. Now, the person who is 19th in the queue knows that the number of white hats on the first 19 people (the 18 people in front of him and himself) is even. He then checks whether the number of white hats in front of him is even or odd. If the number is even, that means the hat on his head is black. If the number is odd, that means the hat on his head is white and calls that out (loudly). Therefore, the 19th person in the queue always guesses correctly, based on the message the 20th person passed on.
+A similar strategy is followed by each person in turn. Therefore, everyone except the last (20th) person guesses correctly for sure. The answer to this puzzle, therefore, is 19.
+
+
+# Place the numbers 1, 2, 3, 4, 5, 6, 7, 8 into the eight circles in figure given below, in such a way that no number is adjacent to a number that is next to it in the sequence.For example 1 should not be adjacent to 2 but can be adjacent to 3, 4, 5, 6, 7, 8. Similarly for others.
+middle line: 7 1 8 2
