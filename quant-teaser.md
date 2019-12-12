@@ -167,19 +167,6 @@ The expected value of p given that you win the auction is x/2.
 Thus the expected profit/loss is (1.5*(x/2)) - x = -0.25x
 so should go at 0.
 
-
-
-There are 10 ways of seating them oldest to youngest (5 ways clockwise, 5 ways counterclockwise). There are 5! = 120 possible seating arrangements. Probability is 10/120, or 8.33%. I believe the OP was right.
-
-
-### 16. 0
-
-
-Jane wants to auction off an item, but does not know where to go to find bidders. David offers to find bidders for her, but will charge her $10 per bidder he gets to show up. Each bidder will uniformly value the item between [500,1000). The highest bidder will win the item and pay the second-highest bidder's price (Vickrey auction). How many bidders should Jane pay David to find?
-
-I need to maximize the difference between 𝐸[second largest bid out of n bidders] and 10𝑛. I'm not sure how to find 𝐸[2nd largest big]
-
-
 ### You have eight balls all of the same size. 7 of them weigh the same, and one of them weighs slightly more. How can you find the ball that is heavier by using a balance and only two weighings?
 
 The first weighing determines how you conduct the second.
@@ -204,13 +191,15 @@ Thus take 1st roll if it is 4 or better, reroll otherwise. Expected payoff:
 1/2 * 5 + 1/2 * 3.5 = 8.5/2 = 4.25
 
 Now we can reroll one more time.
-LEts start from the last roll:
+Let's start from the last roll:
 Roll1=R1 Roll2 = R2...
 
 E(R1 then the rest) = 1/6 * 6 + 1/6 * 5
 E(R2 then R3) = 4.25
 
 payoff is then: 2/6 * 5.5 + 4/6 * 4.25 = 8/3
+2/6: 2 out of 6 to get 5 or 6
+4/6: 1-2-3-4 out of 6 choices
 
 # There are 4 sealed boxes. There is 100 pounds in one box and the others are empty.
 # A player can pay X to open the box and take the contents as many times as they like.
@@ -226,6 +215,8 @@ It is a fair game. Hence:
 100 = X(1/4) + 2X(1/4) + 3X(1/4) + 4X(1/4)
 100 = (10/4)X <==> 100 = 2.5X
 X = 40
+
+X/4 + X/2 + 3X/4 + X = 10X/4
 
 # I pick a number n from 1 to 100. If you guess correctly, I pay you $n and zero otherwise. How much would you pay to play this game?
 
@@ -246,13 +237,6 @@ E(X) = 1/2 * 2 + 1/2 * 1/2 = 5/4
 Provided the tosses are independent, the product of the expectationa is the expectation
 of the product.
 E(PROD (i= 1 to n) Xi) = Prod(i=1 to n) E(Xi) = (5/4)^n which tends to infinity.
-
-
-# Suppose we toss a fair coin, and let N denote the number of tosses until we get a head. (including the final toss).
-# What is E(N) and Var(N) ?
-E(N) = 2
-Var(N) = E(N^2) - [E(N)]^2 = 0
-
 
 
 # subarine throws a torpedo, 40% chance sink other boat. If send 2, proba of sinking other boat?
@@ -282,7 +266,7 @@ Face diagonal: d = sqrt(a^2 + a^2) = sqrt(2(a^2))
 Main Diagonal (what we want): sqrt(2(a^2)+a^2) = sqrt(3(a^2)) = sqrt(3(100)) = sqrt(300)
 
 
-#You start out with 1 dollar and your friend starts out with  2 dollars. You bet 1 dollar until one of you runs out of money. You have a 2/3 chance of winning each bet. What is your chance of winning?
+#You start out with 1 dollar and your friend starts out with 2 dollars. You bet 1 dollar until one of you runs out of money. You have a 2/3 chance of winning each bet. What is your chance of winning?
 p = (2/3) * (2/3) + (2/3) * (1/3) * p
 p = 4/7
 
@@ -295,7 +279,7 @@ If you view the two charts as different then there are 6!, or 720 seating charts
 
 However if you view these two charts as the same then, there are only 5!, or 120 arrangements. Because if you lock in the relative positions there are 6 replications of A-B-C-D-E-F so take 6 x 5 x 4 x 3 x 2 x 1 and divide by 6, now you have 5 x 4 x 3 x 2 x 1 = 5! = 120.
 
-#Logical Reasoning Goal: The person to reach 50 first wins . Rules: Play with another person, say a number, and the other person can say any number upto 10 over your number.
+#Logical Reasoning Goal: The person to reach 50 first wins . Rules: Play with another person, say a number, and the other person can say any number up to 10 over your number.
 
 Go first, and say 6, 17, 28, 39 and 50.
 
@@ -314,11 +298,9 @@ Out of the box solution:
 The solution is to have Dave(10) carry the torch and begin to cross with any of the others lets say Adam(1). Each continues at their own pace so in 1 minute Adam has reached the other side and one of the others can begin to cross say Bob(2), when he reaches the other side Clair(5) can begin to cross. Adam, Bob & Clair will be done in 8 minutes and Dave will be done in a further 2.
 
 #70% free throw shooter, if he shoots twice  what are the chances he'll make at least one?
-P(X is greater or equal to 1) = P(X=1)+P(X=2) Where X is the number of hits.
+1 - P(make 0) = 1 - 0.09 = 0.91
 
-P(X is greater or equal to 1) = (0.7)(0.3)+(0.7)(0.7) = 0.7
-
-#The other was the marble question: 8 marbles that all look the same, one is heavier than the rest, using a balance only twice how do #you find the heaviest marble.
+#The other was the marble question: 8 marbles that all look the same, one is heavier than the rest, using a balance only twice how do you find the heaviest marble.
 
 Label the marbles as: 1,2,3,4,5,6,7,8. Then split them into three groups:
 
@@ -348,7 +330,7 @@ Imagine they sat down in age order, with each person randomly picking a seat. Th
 
 
 
-#We are racing, and can at any time signal to the other that  we would like to double our bet. We've put down 100 to start and during the race I signal to you I want to double the bet, What is the minimum probability of winning for you to accept to continue?
+# We are racing, and can at any time signal to the other that we would like to double our bet. We've put down 100 to start and during the race I signal to you I want to double the bet, What is the minimum probability of winning for you to accept to continue?
 1/3
 Lets assume you start with 0 dollars
 You know youre going to get 200 dollars with probability p and -100 dollars with probability (1-p).
@@ -367,7 +349,7 @@ You'd lose $1.06 on average each time you played this game.
 NO dont wanna play the game
 
 #It costs $1 to play a game where you flip a fair coin four times and if you get four straight heads, you win $10. Do you play the game?  
-Expected payoff: (1/2)^4 * 9 + (1-(1/2)^4) * (-1) = 9/16 - 15/16 - -6/16 = -3/8
+Expected payoff: (1/2)^4 * 9 + (1-(1/2)^4) * (-1) = 9/16 - 15/16 = -6/16 = -3/8
 
 #candy bar A produce 60%, of which 20%damage,B produce  40%, 10% damaged, see a damage bar, probability it come from b
 Bayes:
@@ -431,7 +413,7 @@ so P(M|B) = P(M∩B)/P(B) = (2/x)/(3.5/x) = 4/7
 
 
 
-#3 people wants to determine their average salary  on the condition that no individual would be able to find out anyone else's salary. How can they accomplish this?
+#3 people want to determine their average salary  on the condition that no individual would be able to find out anyone else's salary. How can they accomplish this?
 1) X adds a Random Number and his salary and tells the sum to Y.
 
 2) Y also adds a Random Number and his salary to the sum told by X and tells new sum to Z.
@@ -456,15 +438,26 @@ Remark: The same argument applies if B has 𝑛 coins and A has 𝑛+1.
 
 
 #You choose one of two identical looking bags at random. One bag has three black marbles and one white marble. The other has three white marbles and one black marble. After choosing a bag you draw one marble out at random. You notice it is black. You then put it back and draw another marble out of the same bag at random. What is the probability that the second marble drawn is black?
+Bag1: 3B1W
+Bag2: 3W1B
+
+P(2nd black & first black)/P(1st black)
+P(1st black) = 1/2 (3/4) + 1/2 (1/4) = 1/2
 
 
-Answer
-The probability is 5/8.
+P(2nd black & first black):
+if B1: 3/4
+if B2: 1/4
+P(B1) = 3/4
+P(B2) = 1/4
 
-The probability of event A happening given that event B already happened is the probability of A and B happening divided by the probability that B happened. This can be expressed as Pr(A|B)=Pr(A and B)/Pr(B).
+Answer: 3/4 * 3/4 + 1/4 * 1/4
+
+
 In this case A is drawing a black marble and B is having already drawn a black marble.
+This can be expressed as Pr(A|B)=Pr(A and B)/Pr(B).
 
-Pr(A and B) = (1/2) * [(3/4)2 + (1/4)2] = 5/16.
+Pr(A and B) = (1/2) * [(3/4)^2 + (1/4)^2] = 5/16.
 
 Pr(B) = 1/2.
 
@@ -820,7 +813,7 @@ In third walk, the person toggles every third door, i.e. 3rd, 6th, 9th, …
 ……….
 In 100th walk, the person toggles 100th door.
 
-A door is toggled in ith walk if i divides door number. For example the door number 45 is toggled in 1st, 3rd, 5th, 9th and 15th walk.
+A door is toggled in ith walk if i divides door number. For example the door number 45 is toggled in 1st, 3rd, 5th, 9th, 15th and 45th walk.
 The door is switched back to initial stage for every pair of divisors. For example 45 is toggled 6 times for 3 pairs (5, 9), (15, 3) and (1, 45).
 It looks like all doors would become closes at the end. But there are door numbers which would become open, for example 16, the pair (4, 4) means only one walk. Similarly all other perfect squares like 4, 9, ….
 
@@ -828,7 +821,6 @@ So the answer is 1, 4, 9, 16, 25, 36, 49, 64, 81 and 100.
 
 
 #In a country, all families want a boy. They keep having babies till a boy is born. What is the expected ratio of boys and girls in the country?
-How I solved it, which might not be the right answer:
 X being the number of kids expected:
 
 X = 1 * proba get a boy + proba get a girl (1 + back to beginning: X)
@@ -965,3 +957,47 @@ A similar strategy is followed by each person in turn. Therefore, everyone excep
 
 # Place the numbers 1, 2, 3, 4, 5, 6, 7, 8 into the eight circles in figure given below, in such a way that no number is adjacent to a number that is next to it in the sequence.For example 1 should not be adjacent to 2 but can be adjacent to 3, 4, 5, 6, 7, 8. Similarly for others.
 middle line: 7 1 8 2
+
+
+
+Books:
+-Hull’s classic Options, Futures & Other Derivatives: https://math.dartmouth.edu/~m86f17/Downloads/Hull8thedition.pdf
+Options like futures provide a form of leverage. For a given investment, the use of
+options magnifies the financial consequences. Good outcomes become very good, while
+bad outcomes result in the whole initial investment being lost.
+
+CAPM: expected return asset = Rf + Beta(Rm-Rf)
+if rate is compounded m times per annum, terminal value of the investment is A(1 + R/m)^(mn)
+if continuous compounding: Ae^(Rn)
+
+
+Natenberg’s classic Option Volatility & Pricing: http://1.droppdf.com/files/23rd5/option-volatility-and-pricing-advanced-tr-sheldon-natenberg.pdf
+
+Nassim Taleb Black Swan:
+My idea is that not only are some scientific results useless in real life, because they underestimate the impact of the highly improbable (or lead us to ignore it), but that many of them may be actually creating Black Swans.
+==> efficient market hypothesis ironically increases the number and magnitude of black swans
+History makes jumps ==> there are weeks in which decades happen
+
+=> intuitively we underweight unlikely events.
+=> if you are making black swan bets then you actually want less data bc the data will drive you to quit.
+
+Show two groups of people a blurry image of a fire hydrant, blurry enough for them not to recognize what it is. For one group, increase the resolution slowly, in ten steps. For the second, do it faster, in five steps. Stop at a point where both groups have been presented an identical image and ask each of them to identify what they see. The members of the group that saw fewer intermediate steps are likely to recognize the hydrant much faster. Moral? The more information you give someone, the more hypotheses they will formulate along the way, and the worse off they will be. They see more random noise and mistake it for information.
+
+=> benefit to having multiple things going on is less time to pay attention to noise
+
+
+Nassim Taleb Fooled By Randomness:
+“Mild success can be explainable by skills and labor. Wild success is attributable to variance.”
+“Remember that nobody accepts randomness in his own success, only his failure.”
+Skewness and expectations: you can't just look at the odds of something happening, but also the payoff you receive if it works (and the cost of it failing). A bet on something very unlikely can be smart if the payoff is large and you have rules to limit the many small losses that are likely.
+Minor stalemates in life can often be solved by choosing randomly. In many cases it doesn't really matter so long as you choose something and move forward.
+
+
+High frequency trading (HFT) is a technology-driven trading method that provides liquidity and saves investors money by utilizing advanced algorithms to analyze multiple markets and execute orders based on market conditions to transact many orders at fractions of a second at the most efficient price    
+
+What is an automated market maker?
+- Solves the buyer/seller matching problem. The automated market maker guarantees that the market is always available to trade, even at 2 in the morning in your local time zone, even at the market’s initiation, and even if no other traders are currently active. By giving traders confidence that they can obtain liquidity for their wagers whenever they choose, automated market makers create additional incentives to participate.
+- Enables large markets with many events.
+- Concisely expresses the market’s current state.
+- Allows for precise control of worst-case loss by market sponsors.
+- Automated Market Makers prevent common trader errors and information redundancy.
