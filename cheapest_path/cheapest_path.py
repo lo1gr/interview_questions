@@ -1,9 +1,9 @@
 # inspiration:
-# https://www.geeksforgeeks.org/printing-paths-dijkstras-shortest-path-algorithm/
 # https://en.wikipedia.org/wiki/Shortest_path_problem
 # https://en.wikipedia.org/wiki/Dijkstra's_algorithm
 # https://www.youtube.com/watch?v=lAXZGERcDf4
 # https://www.youtube.com/watch?v=GazC3A4OQTE
+# https://www.geeksforgeeks.org/printing-paths-dijkstras-shortest-path-algorithm/
 # https://www.youtube.com/watch?v=XB4MIexjvY0
 # https://benalexkeen.com/implementing-djikstras-shortest-path-algorithm-with-python/
 # https://medium.com/cantors-paradise/dijkstras-shortest-path-algorithm-in-python-d955744c7064
@@ -232,12 +232,21 @@ def cheapest_path(matrix, start, finish):
     arr = []
     ncol = matrix.shape[1]
     
+    print('Converting positions to indexes')
     start = convert_position(start, matrix)
+    print('start:', start)
     finish = convert_position(finish, matrix)
+    print('finish: ', finish)
+
+    print('Converting matrix to adjacency matrix')
     graph = return_adjacency_matrix(matrix)
+    print(graph)
+    print('\n')
 
     g = Graph() 
     # Print the solution 
+
+    print('Running Dijkstra\'s algorithm on the adjacency graph generated')
     g.dijkstra(graph,start, finish)
 
 cheapest_path(matrix, start, finish)
