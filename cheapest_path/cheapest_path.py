@@ -196,6 +196,9 @@ class Graph:
     
             # remove min element -> checked all the paths going from this node     
             queue.remove(u) 
+            print('queue: ', queue)
+            print('u: ', u)
+            print('parent: ', parent)
 
             # Update dist value and parent  
             # index of the adjacent vertices of 
@@ -212,12 +215,14 @@ class Graph:
                     # if dist[0] + graph[0][1] < dist[1], then found a shortest path to a specific node and have to add it
                     if dist[u] + graph[u][i] < dist[i]: 
                         dist[i] = dist[u] + graph[u][i] 
-                        parent[i] = u 
-  
+                        parent[i] = u
+                        print('i: ', i)
+                        print('dist[i]: ', dist[i])
   
             # We can terminate the search line if u == finish, so that we do not compute unnecessary paths
             if u == finish:
                 break
+            print('\n')
         # print the constructed distance array 
         self.printSolution(parent, finish) 
 
