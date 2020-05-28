@@ -1,5 +1,12 @@
-# Test.it("But what if you actually needed to move?")
-# Test.assert_equals(cheapest_path([[1,9,1],[2,9,1],[2,1,1]], (0,0), (0,2)), ["down", "down", "right", "right", "up", "up"])
+# inspiration:
+# https://www.geeksforgeeks.org/printing-paths-dijkstras-shortest-path-algorithm/
+# https://en.wikipedia.org/wiki/Shortest_path_problem
+# https://en.wikipedia.org/wiki/Dijkstra's_algorithm
+# https://www.youtube.com/watch?v=lAXZGERcDf4
+# https://www.youtube.com/watch?v=GazC3A4OQTE
+# https://www.youtube.com/watch?v=XB4MIexjvY0
+# https://benalexkeen.com/implementing-djikstras-shortest-path-algorithm-with-python/
+# https://medium.com/cantors-paradise/dijkstras-shortest-path-algorithm-in-python-d955744c7064
 
 # Steps:
 # 1. Convert start & end tuples to index in array
@@ -11,7 +18,6 @@
 # 3. Pass this matrix to Djikstra s algorithm while keeping track of the parent nodes for shortest path
 # 4. Finish the matrix
 
-
 import numpy as np
 import sys
 from collections import defaultdict 
@@ -19,7 +25,6 @@ from collections import defaultdict
 matrix = np.array([[1,9,1],[2,9,1],[2,1,1]])
 start = (0,0)
 finish = (0,2)
-
 
 def convert_position(el:tuple, matrix):
     """Get array index of tuple start and tuple finish
@@ -109,15 +114,12 @@ def return_adjacency_matrix(matrix):
 
 
 
-# Python program for Dijkstra's  
-# single source shortest 
-# path algorithm. The program 
-# is for adjacency matrix 
+# Python program for Dijkstra's single source shortest 
+# path algorithm. The program is for adjacency matrix 
 # representation of the graph
-  
-  
+
 class Graph: 
-  
+
     # A utility function to find the  
     # vertex with minimum dist value, from 
     # the set of vertices still in queue 
@@ -158,15 +160,11 @@ class Graph:
         return self.printDirection(arr)
 
           
-    # A utility function to print 
-    # the constructed distance 
-    # array 
+    # function to print the constructed distance array 
     def printSolution(self, parent, finish): 
         print(self.printPath(parent,finish))
   
-    '''Function that implements Dijkstra's single source shortest path 
-    algorithm for a graph represented using adjacency matrix 
-    representation'''
+    # main function in class
     def dijkstra(self, graph, src, finish): 
         row = len(graph) 
         col = len(graph[0])
@@ -188,18 +186,17 @@ class Graph:
         queue = [] 
         for i in range(row): 
             queue.append(i) 
-              
+
         #Find shortest path for all vertices 
         while queue: 
             # Pick the minimum dist vertex  
             # from the set of vertices 
             # still in queue 
-            u = self.minDistance(dist,queue)  
-
-  
+            u = self.minDistance(dist,queue)
+    
             # remove min element -> checked all the paths going from this node     
             queue.remove(u) 
-  
+
             # Update dist value and parent  
             # index of the adjacent vertices of 
             # the picked vertex. Consider only  
@@ -218,16 +215,18 @@ class Graph:
                         parent[i] = u 
   
   
+            # We can terminate the search line if u == finish, so that we do not compute unnecessary paths
+            if u == finish:
+                break
         # print the constructed distance array 
         self.printSolution(parent, finish) 
 
-
 def cheapest_path(matrix, start, finish):
     matrix = np.array(matrix)
-    global arr 
+    global arr, ncol 
     arr = []
-    global ncol
     ncol = matrix.shape[1]
+    
     start = convert_position(start, matrix)
     finish = convert_position(finish, matrix)
     graph = return_adjacency_matrix(matrix)
@@ -239,4 +238,3 @@ def cheapest_path(matrix, start, finish):
 cheapest_path(matrix, start, finish)
 # cheapest_path([[1]], (0,0), (0,0))
 # cheapest_path([[1,4,1],[1,9,1],[1,1,1]], (0,0), (0,2))
-
