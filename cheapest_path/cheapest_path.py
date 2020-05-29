@@ -16,7 +16,8 @@
 #     b. create adjacency matrix, all 0 except 1s for the elements that have a weight
 #     c. multiply all rows of elements with the same 'leaving weight': a row will contain either a 0 or this leaving weight
 # 3. Pass this matrix to Djikstra s algorithm while keeping track of the parent nodes for shortest path
-# 4. Finish the matrix
+# 4. Knowing the difference between the index of parent and current node in the final optimized path, 
+# we will be able to say which direction to go: if +1 then right, if -1 then left, if +ncol then down, if -ncol then up
 
 import numpy as np
 import sys
@@ -120,9 +121,8 @@ def return_adjacency_matrix(matrix):
 
 class Graph: 
 
-    # A utility function to find the  
-    # vertex with minimum dist value, from 
-    # the set of vertices still in queue 
+    # Return the index of the vertex with minimum dist value
+    # from the set of vertices still in queue (still not totally explored)  
     def minDistance(self,dist,queue): 
         # Initialize min value and min_index as -1 
         minimum = float("Inf") 
@@ -146,10 +146,9 @@ class Graph:
             (np.where(diff==-1, "left",
             "right")))))
         return list(diff)
+
     # Function to print shortest path 
     # from source to j 
-    # using parent array 
-
     def printPath(self, parent, j): 
         #Base Case : If j is source 
         if parent[j] == -1 :  
@@ -159,7 +158,6 @@ class Graph:
         arr.append(j) 
         return self.printDirection(arr)
 
-          
     # function to print the constructed distance array 
     def printSolution(self, parent, finish): 
         print(self.printPath(parent,finish))
