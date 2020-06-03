@@ -21,11 +21,7 @@
 
 import numpy as np
 import sys
-from collections import defaultdict 
-
-matrix = np.array([[1,9,1],[2,9,1],[2,1,1]])
-start = (0,0)
-finish = (0,2)
+from collections import defaultdict, deque 
 
 def convert_position(el:tuple, matrix):
     """Get array index of tuple start and tuple finish
@@ -136,6 +132,7 @@ class Graph:
     def printDirection(self, arr):
     # compute difference between array elements of the path found by Djikstra's algorithm.
     # if +ncol then down, -ncol then up, +1 then right, -1 then left
+        print(arr)
         diff = np.diff(arr)
         diff = np.where(diff == ncol, "down", 
             (np.where(diff==-ncol, "up", 
@@ -145,18 +142,15 @@ class Graph:
 
     # Function to print shortest path 
     # from source to j 
-    def printPath(self, parent, j): 
+    def printSolution(self, parent, j):
+        print('j: ' + str(j))
+        print(arr)
         #Base Case : If j is source 
-        if parent[j] == -1 :  
-            arr.append(j) 
-            return
-        self.printPath(parent , parent[j]) 
-        arr.append(j) 
-        return self.printDirection(arr)
-
-    # function to print the constructed distance array 
-    def printSolution(self, parent, finish): 
-        print(self.printPath(parent,finish))
+        arr.appendleft(j)
+        if parent[j] != -1:
+            self.printSolution(parent, parent[j])
+        else:
+            print(self.printDirection(arr))
   
     # main function in class
     def dijkstra(self, graph, src, finish): 
@@ -218,12 +212,13 @@ class Graph:
                 break
             print('\n')
         # print the constructed distance array 
+        print('parent: ' + str(parent))
         self.printSolution(parent, finish) 
 
 def cheapest_path(matrix, start, finish):
     matrix = np.array(matrix)
     global arr, ncol 
-    arr = []
+    arr = deque()
     ncol = matrix.shape[1]
     
     print('Converting positions to indexes')
@@ -243,6 +238,12 @@ def cheapest_path(matrix, start, finish):
     print('Running Dijkstra\'s algorithm on the adjacency graph generated')
     g.dijkstra(graph,start, finish)
 
-cheapest_path(matrix, start, finish)
+
+# Testing the program:
+
+matrix = np.array([[1,9,1],[2,9,1],[2,1,1]])
+begin = (0,0)
+end = (0,2)
+cheapest_path(matrix, begin, end)
 # cheapest_path([[1]], (0,0), (0,0))
 # cheapest_path([[1,4,1],[1,9,1],[1,1,1]], (0,0), (0,2))
